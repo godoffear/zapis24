@@ -85,6 +85,17 @@ header.s{border-color:var(--line)}
 .hero .m{opacity:0;transform:translateY(6px);animation:in .45s ease forwards}
 .hero .m:nth-child(1){animation-delay:.3s}.hero .m:nth-child(2){animation-delay:1.3s}.hero .m:nth-child(3){animation-delay:2.4s}.hero .m:nth-child(4){animation-delay:3.4s}.hero .m:nth-child(5){animation-delay:4.4s}.hero .m:nth-child(6){animation-delay:5.4s}
 @keyframes in{to{opacity:1;transform:none}}
+.rep{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:32px;max-width:900px}
+.rep-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:8px}
+.rep-h b{font-size:18px}.rep-h small{color:var(--mut);font-size:13px}
+.rep-tag{display:inline-block;background:var(--blush);color:var(--wine);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600;letter-spacing:.02em}
+.rep-g{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.rep-i{padding:22px 18px 6px 0}.rep-i+.rep-i{padding-left:18px;border-left:1px solid var(--line)}
+.rep-i .k{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--wine);font-weight:600}
+.rep-i .v{font-family:var(--serif);font-variant-numeric:lining-nums;font-size:52px;line-height:1;margin:10px 0 8px;color:var(--ink)}
+.rep-i p{font-size:14px;color:var(--ink2);margin:0}
+.rep-note{margin-top:22px;font-size:13px;color:var(--mut)}
+@media (max-width:760px){.rep{padding:22px}.rep-g{grid-template-columns:1fr 1fr}.rep-i,.rep-i+.rep-i{padding:18px 12px 6px 0;border-left:0}.rep-i:nth-child(even){padding-left:12px;border-left:1px solid var(--line)}.rep-i .v{font-size:42px}}
 @media (prefers-reduced-motion:reduce){.hero .m{animation:none;opacity:1;transform:none}html{scroll-behavior:auto}}
 
 section{padding:clamp(64px,9vw,120px) 0}
@@ -356,6 +367,22 @@ footer a:hover{color:var(--ink)}
       </div></div>
       <div class="cap"><b><i>03</i>Напоминание, отзыв, возврат</b><span>Меньше неявок, больше отзывов, клиенты возвращаются вовремя.</span></div>
     </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">Отчёт владельцу</span>
+  <h2>Каждый месяц вы видите, скольких клиентов бот&nbsp;сохранил</h2>
+  <p class="sub">Так выглядит ежемесячный отчёт. Цифры ниже — пример для демо-студии «Лаванда», а не результаты реального салона: в вашем отчёте будут ваши данные.</p>
+  <div class="rep">
+    <div class="rep-h"><div><b>Nail Studio «Лаванда» · октябрь</b><br><small>3 мастера · около 300 визитов в месяц</small></div><span class="rep-tag">Пример отчёта</span></div>
+    <div class="rep-g">
+      <div class="rep-i"><span class="k">Ответ</span><div class="v">47</div><p>сообщений вечером, ночью и в выходные получили ответ за минуту — 29 из них закончились заявкой</p></div>
+      <div class="rep-i"><span class="k">Напоминание</span><div class="v">6</div><p>клиентов заранее отменили или перенесли визит — окна успели занять другие</p></div>
+      <div class="rep-i"><span class="k">Отзывы</span><div class="v">9</div><p>новых отзывов в 2ГИС и на Картах, и 2 недовольные гостьи, с которыми владелец успел поговорить</p></div>
+      <div class="rep-i"><span class="k">Возврат</span><div class="v">12</div><p>постоянных клиенток записались на коррекцию после напоминания</p></div>
+    </div>
+    <p class="rep-note">Пример рассчитан для иллюстрации. Реальные цифры зависят от числа обращений в вашем салоне — первый отчёт вы получите по итогам 14 бесплатных дней.</p>
   </div>
 </div></section>
 
