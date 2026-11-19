@@ -94,6 +94,13 @@ footer{padding:36px 0;color:var(--mut);font-size:14px;text-align:center}
  .compare th,.compare td{padding:10px;font-size:14px}
  header .btn{display:none}
 }
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.shots .phone{max-width:320px}
+.shots .chat{min-height:360px}
+.shots .m{opacity:1;transform:none;animation:none}
+.cap{text-align:center;margin-top:14px;font-weight:700}
+.cap small{display:block;color:var(--mut);font-weight:400;font-size:15px}
+@media(max-width:900px){.shots{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -146,6 +153,50 @@ footer{padding:36px 0;color:var(--mut);font-size:14px;text-align:center}
     <div class="box"><div class="ic">⏰</div><h3>Напоминает о визите</h3><p>За день до записи — чтобы клиенты не забывали и было меньше неявок.</p></div>
     <div class="box"><div class="ic">⭐</div><h3>Собирает отзывы</h3><p>После визита просит оценить вас в 2ГИС и на Яндекс Картах — растёт рейтинг.</p></div>
   </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <h2>Как это выглядит</h2>
+  <p class="sub">Пример на демо-студии «Лаванда». Так же будет работать бот вашего салона — с вашими услугами, ценами и мастерами.</p>
+  <div class="shots">
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="tg-top"><div class="ava">Л</div><div><b>Nail Studio Лаванда</b><small>бот · онлайн</small></div></div>
+        <div class="chat">
+          <div class="m u">А наращивание делаете? И сколько по времени?<time>21:15</time></div>
+          <div class="m b">Да! Наращивание ногтей — 3 500 ₽, около 2,5 часов. Делает мастер Мария, она работает со среды по воскресенье 💅<time>21:15</time></div>
+          <div class="m u">А в воскресенье утром есть?<time>21:16</time></div>
+          <div class="m b">Могу предварительно записать на воскресенье, 10:00 — администратор подтвердит утром. Как вас зовут и ваш телефон?<time>21:16</time></div>
+          <div class="m u">Катя, 8 950 123-45-67<time>21:17</time></div>
+          <div class="m b">Катя, записала вас на воскресенье в 10:00 к Марии на наращивание 🌸 Ждём по адресу ул. Карла Маркса, 25!<time>21:17</time></div>
+        </div>
+      </div></div>
+      <div class="cap">1. Клиент пишет вечером<small>бот отвечает по вашему прайсу и записывает</small></div>
+    </div>
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="tg-top"><div class="ava" style="background:linear-gradient(135deg,#5fc6a0,#2fb37a)">А</div><div><b>Администратор салона</b><small>ваш Telegram</small></div></div>
+        <div class="chat">
+          <div class="m b card">🔔 <b>Новая заявка — Лаванда</b><br><br>👤 Катя<br>📞 8 950 123-45-67<br>💅 Наращивание ногтей<br>👩 Мастер: Мария<br>📅 Вс, 10:00<br>✈️ Telegram: @katya_irk<br>🕒 Заявка принята в 21:17</div>
+          <div class="m b card">🔔 <b>Новая заявка — Лаванда</b><br><br>👤 Ольга · 📞 8 914 000-11-22<br>💅 Маникюр + гель-лак · Анна<br>📅 Пн, 12:30<br>🕒 Заявка принята в 02:05</div>
+        </div>
+      </div></div>
+      <div class="cap">2. Вам приходит готовая заявка<small>мгновенно в Telegram + строка в Google-таблице</small></div>
+    </div>
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="tg-top"><div class="ava">Л</div><div><b>Nail Studio Лаванда</b><small>бот · онлайн</small></div></div>
+        <div class="chat">
+          <div class="m b">Здравствуйте, Катя! 🌸 Напоминаем: завтра в 10:00 у вас наращивание ногтей у Марии. Адрес: ул. Карла Маркса, 25.<br>Если планы изменились — напишите, перенесём.<time>сб, 10:00</time></div>
+          <div class="m u">Спасибо, приду!<time>сб, 10:12</time></div>
+          <div class="m b">Катя, спасибо, что были у нас! 💜 Как вам наращивание? Будем очень благодарны за отзыв в 2ГИС — это минута, а мастерам очень помогает ⭐<time>вс, 15:30</time></div>
+          <div class="m u">Всё супер, оставила ⭐⭐⭐⭐⭐<time>вс, 15:41</time></div>
+        </div>
+      </div></div>
+      <div class="cap">3. Напоминание и отзыв<small>меньше неявок, больше отзывов и выше рейтинг</small></div>
+    </div>
+  </div>
+  <div class="cta" style="justify-content:center;margin-top:34px"><a class="btn" href="https://t.me/zapis24demo_bot" target="_blank">💬 Попробовать демо самому</a></div>
 </div></section>
 
 <section class="pain"><div class="wrap">
