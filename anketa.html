@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Анкета салона — Запись24</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f7f3ee">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f3ee;--paper:#fffdfa;--ink:#231a1f;--ink2:#4a3d43;--mut:#7d7076;--line:#e7ded5;--wine:#7a2e4d;--wine-d:#5e2139;--blush:#f1e1e3;--sage:#3f7a5e;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Onest",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);font-size:17px;line-height:1.55;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--wine)}
+.wrap{width:min(760px,100% - 32px);margin:0 auto;padding:28px 0 80px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px}
+.logo{font-family:var(--serif);font-size:26px;font-weight:600;text-decoration:none;color:var(--ink)}
+.logo b{color:var(--wine)}
+h1{font-family:var(--serif);font-size:clamp(38px,6vw,56px);line-height:1.05;font-weight:600;margin-bottom:14px}
+.intro{color:var(--ink2);margin-bottom:34px;max-width:58ch}
+fieldset{border:1px solid var(--line);background:var(--paper);border-radius:18px;padding:26px 24px 10px;margin-bottom:22px}
+legend{font-family:var(--serif);font-size:28px;font-weight:600;padding:0 8px;margin-left:-8px}
+legend span{color:var(--wine);font-size:18px;margin-right:6px;font-family:var(--sans);font-weight:600}
+.f{margin-bottom:22px}
+.f>label,.f>.l{display:block;font-weight:600;margin-bottom:4px}
+.req::after{content:" *";color:var(--wine)}
+.h{font-size:14px;color:var(--mut);margin-bottom:8px;white-space:pre-line}
+input[type=text],input[type=tel],input[type=email],textarea,select{width:100%;font:inherit;color:inherit;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--wine);outline-offset:1px;border-color:transparent}
+.opts label{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:#fff;cursor:pointer;font-weight:400}
+.opts label:has(input:checked){border-color:var(--wine);background:var(--blush)}
+.opts input{margin-top:5px;accent-color:var(--wine)}
+input[type=file]{font:inherit;font-size:15px;width:100%;padding:12px;border:1px dashed #cdbfb3;border-radius:12px;background:#fff}
+.files{font-size:14px;color:var(--mut);margin-top:6px}
+.hp{position:absolute;left:-9999px}
+.consent{display:flex;gap:10px;font-size:15px;color:var(--ink2);margin:8px 0 22px}
+.consent input{margin-top:5px;accent-color:var(--wine)}
+button{font:inherit;font-weight:600;background:var(--wine);color:#fff;border:0;border-radius:999px;padding:16px 34px;cursor:pointer;width:100%;font-size:18px}
+button:hover{background:var(--wine-d)}button:disabled{opacity:.6;cursor:wait}
+.msg{margin-top:16px;padding:14px 16px;border-radius:12px;display:none}
+.msg.err{display:block;background:#fbe9e9;color:#8a1c1c}
+.done{display:none;text-align:center;padding:60px 10px}
+.done h2{font-family:var(--serif);font-size:44px;margin-bottom:12px}
+.done p{color:var(--ink2);max-width:46ch;margin:0 auto 10px}
+.progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:12px;display:none}
+.progress i{display:block;height:100%;width:0;background:var(--wine);transition:width .2s}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><a class="logo" href="/">Запись<b>24</b></a><a href="/" style="font-size:15px">← на главную</a></div>
+
+<div id="formbox">
+<h1>Анкета салона</h1>
+<p class="intro">По этим данным мы настроим бота под ваш салон. Займёт 10–15 минут. Если чего-то нет под рукой — пропустите, уточним в переписке. Поля со звёздочкой обязательны.</p>
+
+<form id="f" novalidate>
+<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+<fieldset><legend><span>01</span>О салоне</legend>
+<div class="f"><label class="req" for="salon">Название салона или имя мастера</label><div class="h">Так будет называться бот, например: Nail Studio «Лаванда»</div><input type="text" id="salon" name="salon" required maxlength="200"></div>
+<div class="f"><label class="req" for="city">Город</label><input type="text" id="city" name="city" required maxlength="100"></div>
+<div class="f"><div class="l req">Формат</div><div class="opts">
+<label><input type="radio" name="format" value="Частный мастер" required> Частный мастер</label>
+<label><input type="radio" name="format" value="Студия / салон"> Студия / салон</label>
+<label><input type="radio" name="format" value="Сеть из нескольких филиалов"> Сеть из нескольких филиалов</label></div></div>
+<div class="f"><label class="req" for="address">Адрес и как найти вход</label><div class="h">Например: ул. Карла Маркса, 25, 2 этаж, вход со двора</div><input type="text" id="address" name="address" required maxlength="500"></div>
+<div class="f hidden" id="branchesBox"><label for="branches">Филиалы</label><div class="h">Каждый филиал с новой строки: адрес — телефон — Telegram администратора</div><textarea id="branches" name="branches" maxlength="3000"></textarea></div>
+<div class="f"><label class="req" for="hours">График работы</label><div class="h">Например: пн–пт 9:00–21:00, сб–вс 10:00–18:00</div><input type="text" id="hours" name="hours" required maxlength="300"></div>
+<div class="f"><label class="req" for="phones">Телефоны для клиентов</label><div class="h">Каждый номер с новой строки. Можно указать, чей: администратор, мастер</div><textarea id="phones" name="phones" required maxlength="1000" style="min-height:70px"></textarea></div>
+</fieldset>
+
+<fieldset><legend><span>02</span>Услуги и мастера</legend>
+<div class="f"><label for="price">Прайс: услуги, цены, длительность</label><div class="h">Каждая услуга с новой строки: услуга — цена — длительность.
+Например: Маникюр с покрытием — 1 800 ₽ — 1,5 ч
+Можно вместо этого прикрепить фото/файл прайса ниже или дать ссылку на страницу с ценами.</div><textarea id="price" name="price" maxlength="8000" style="min-height:140px"></textarea></div>
+<div class="f"><label for="price_files">Фото или файл прайса</label><input type="file" id="price_files" name="price_files" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"><div class="files">До 10 файлов, всего до 25 МБ</div></div>
+<div class="f"><label class="req" for="masters">Мастера: имя, что делает, в какие дни работает</label><div class="h">Каждый мастер с новой строки. Например:
+Анна — маникюр, педикюр — пн–пт
+Мария — брови, ресницы — сб–вс</div><textarea id="masters" name="masters" required maxlength="3000"></textarea></div>
+<div class="f"><label for="promo">Акции и скидки, которые бот может предлагать</label><div class="h">Например: −15% на первый визит</div><textarea id="promo" name="promo" maxlength="2000" style="min-height:70px"></textarea></div>
+<div class="f"><label for="rules">Важные правила</label><div class="h">Предоплата, опоздания, отмена записи, парковка, можно ли с детьми и т. п.</div><textarea id="rules" name="rules" maxlength="3000"></textarea></div>
+<div class="f"><label for="never">Чего бот НЕ должен обещать или говорить</label><textarea id="never" name="never" maxlength="2000" style="min-height:70px"></textarea></div>
+</fieldset>
+
+<fieldset><legend><span>03</span>Заявки и ссылки</legend>
+<div class="f"><label class="req" for="admins">Кому присылать заявки</label><div class="h">Telegram-ник администратора или владельца, каждый с новой строки. Например: @anna_lavanda</div><textarea id="admins" name="admins" required maxlength="500" style="min-height:70px"></textarea></div>
+<div class="f"><div class="l req">Как к вам сейчас записываются клиенты</div><div class="h">Можно выбрать несколько</div><div class="opts">
+<label><input type="checkbox" name="booking_now" value="YCLIENTS"> YCLIENTS</label>
+<label><input type="checkbox" name="booking_now" value="DIKIDI"> DIKIDI</label>
+<label><input type="checkbox" name="booking_now" value="Другая онлайн-запись"> Другая онлайн-запись</label>
+<label><input type="checkbox" name="booking_now" value="Пишут в мессенджеры / VK"> Пишут в Telegram / WhatsApp / MAX / VK</label>
+<label><input type="checkbox" name="booking_now" value="Звонят по телефону"> Звонят по телефону</label></div></div>
+<div class="f"><label for="booking_link">Ссылка на вашу онлайн-запись (если есть)</label><div class="h">Страница, где клиент сам выбирает услугу, мастера и время — например, в YCLIENTS или DIKIDI</div><input type="text" id="booking_link" name="booking_link" maxlength="500"></div>
+<div class="f"><label class="req" for="links">Где вам пишут клиенты — ссылки</label><div class="h">Каждая ссылка с новой строки: VK, 2ГИС, Яндекс Карты, сайт и т. д. Туда мы поставим ссылку на бота.</div><textarea id="links" name="links" required maxlength="2000"></textarea></div>
+<div class="f"><label for="reviews">Где оставлять отзывы — ссылки</label><div class="h">2ГИС, Яндекс Карты и т. д. После визита бот будет просить клиента оставить отзыв.</div><textarea id="reviews" name="reviews" maxlength="1500" style="min-height:70px"></textarea></div>
+<div class="f"><div class="l req">Как бот общается с клиентами</div><div class="opts">
+<label><input type="radio" name="tone" value="На «вы», тепло и вежливо" required> На «вы», тепло и вежливо</label>
+<label><input type="radio" name="tone" value="На «вы», коротко и по делу"> На «вы», коротко и по делу</label>
+<label><input type="radio" name="tone" value="На «вы», легко, с эмодзи и юмором"> На «вы», легко, с эмодзи и юмором</label>
+<label><input type="radio" name="tone" value="На «ты», по-дружески"> На «ты», по-дружески</label></div></div>
+</fieldset>
+
+<fieldset><legend><span>04</span>Оформление</legend>
+<div class="f"><div class="l req">Логотип для бота</div><div class="opts">
+<label><input type="radio" name="logo_choice" value="Есть, прикреплю" required> Есть — прикреплю ниже</label>
+<label><input type="radio" name="logo_choice" value="Нет — сделать для бота (бесплатно)"> Логотипа нет — сделайте для бота (бесплатно)</label>
+<label><input type="radio" name="logo_choice" value="Нет — сделать логотип для салона (платно)"> Логотипа нет — сделайте логотип для салона: для бота, соцсетей, визиток (платно, сообщим цену)</label></div></div>
+<div class="f" id="logoBox"><label for="logo">Логотип</label><input type="file" id="logo" name="logo" accept="image/*,.pdf,.svg"></div>
+<div class="f"><label for="photos">Фото салона или работ (по желанию)</label><input type="file" id="photos" name="photos" multiple accept="image/*"></div>
+</fieldset>
+
+<fieldset><legend><span>05</span>Тариф и оплата</legend>
+<div class="f"><div class="l req">Тариф</div><div class="h">Первые 14 дней бесплатно. Оплата — только если бот понравился.</div><div class="opts">
+<label><input type="radio" name="tariff" value="Частный мастер" required> Частный мастер — подключение 2 990 ₽, далее 990 ₽/мес</label>
+<label><input type="radio" name="tariff" value="Студия"> Студия — подключение 4 990 ₽, далее 1 990 ₽/мес</label>
+<label><input type="radio" name="tariff" value="Сеть"> Сеть — подключение 9 900 ₽, далее 4 990 ₽/мес</label></div></div>
+<div class="f"><div class="l req">Как будете оплачивать</div><div class="opts">
+<label><input type="radio" name="payer" value="Физлицо" required> Как физлицо (СБП / на карту)</label>
+<label><input type="radio" name="payer" value="ИП"> ИП — по счёту</label>
+<label><input type="radio" name="payer" value="ООО"> ООО — по счёту</label></div></div>
+<div id="reqBox" class="hidden">
+<div class="f"><label for="org">Название организации и ИНН</label><div class="h">Нужно для счёта и чека. Например: ИП Иванова Анна Сергеевна, ИНН 380800000000</div><input type="text" id="org" name="org" maxlength="300"></div>
+<div class="f"><label for="requisites">Реквизиты (если удобнее текстом)</label><div class="h">ОГРН/ОГРНИП, юр. адрес, банк, БИК, расчётный счёт</div><textarea id="requisites" name="requisites" maxlength="3000"></textarea></div>
+<div class="f"><label for="req_file">Или карточка организации файлом</label><input type="file" id="req_file" name="req_file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"></div>
+</div>
+</fieldset>
+
+<fieldset><legend><span>06</span>Контакты</legend>
+<div class="f"><label class="req" for="contact_name">Контактное лицо: имя</label><input type="text" id="contact_name" name="contact_name" required maxlength="150"></div>
+<div class="f"><label class="req" for="contact_phone">Телефон</label><input type="tel" id="contact_phone" name="contact_phone" required maxlength="40" placeholder="+7 900 000-00-00"></div>
+<div class="f"><div class="l req">Где удобнее держать связь</div><div class="opts">
+<label><input type="radio" name="channel" value="Telegram" required> Telegram</label>
+<label><input type="radio" name="channel" value="MAX"> MAX</label>
+<label><input type="radio" name="channel" value="VK"> VK</label>
+<label><input type="radio" name="channel" value="WhatsApp"> WhatsApp</label>
+<label><input type="radio" name="channel" value="Почта"> Электронная почта</label></div></div>
+<div class="f"><label class="req" for="contact_handle">Ваш ник, ссылка или почта для связи</label><input type="text" id="contact_handle" name="contact_handle" required maxlength="200"></div>
+<div class="f"><label for="comment">Комментарий или пожелания</label><textarea id="comment" name="comment" maxlength="3000" style="min-height:70px"></textarea></div>
+</fieldset>
+
+<label class="consent"><input type="checkbox" id="consent" required> <span>Согласен(на) на обработку персональных данных по <a href="https://zapis24bot.ru/privacy.html" target="_blank">политике конфиденциальности</a> и с <a href="https://zapis24bot.ru/oferta.html" target="_blank">договором-офертой</a>.</span></label>
+<button type="submit" id="btn">Отправить анкету</button>
+<div class="progress" id="prog"><i></i></div>
+<div class="msg" id="msg"></div>
+</form>
+</div>
+
+<div class="done" id="done">
+<h2>Спасибо!</h2>
+<p>Анкета получена. Номер заявки: <b id="cid"></b>.</p>
+<p>Мы настроим бота и напишем вам в течение рабочего дня. 14 дней — бесплатно.</p>
+<p style="margin-top:24px"><a href="/">Вернуться на сайт</a></p>
+</div>
+</div>
+<script>
+const API = (location.hostname === 'api.zapis24bot.ru' || location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? '/anketa/submit' : 'https://api.zapis24bot.ru/anketa/submit';
+const f = document.getElementById('f'), msg = document.getElementById('msg'), btn = document.getElementById('btn');
+const MAXB = 25 * 1024 * 1024;
+function toggle(){
+  const fmt = (f.querySelector('[name=format]:checked')||{}).value||'';
+  document.getElementById('branchesBox').classList.toggle('hidden', !fmt.startsWith('Сеть'));
+  const p = (f.querySelector('[name=payer]:checked')||{}).value||'';
+  document.getElementById('reqBox').classList.toggle('hidden', p === '' || p === 'Физлицо');
+  const lc = (f.querySelector('[name=logo_choice]:checked')||{}).value||'';
+  document.getElementById('logoBox').classList.toggle('hidden', lc !== '' && !lc.startsWith('Есть'));
+}
+f.addEventListener('change', toggle);
+// preselect tariff: ?t=master|studio|network
+const t = {master:'Частный мастер', studio:'Студия', network:'Сеть'}[new URLSearchParams(location.search).get('t')];
+if (t) { const r = f.querySelector(`[name=tariff][value="${t}"]`); if (r) r.checked = true; }
+toggle();
+function err(text, el){ msg.className = 'msg err'; msg.textContent = text; if (el) { el.scrollIntoView({behavior:'smooth', block:'center'}); el.focus && el.focus(); } }
+f.addEventListener('submit', async e => {
+  e.preventDefault(); msg.className = 'msg';
+  for (const el of f.querySelectorAll('[required]')) {
+    if (el.type === 'radio') { if (!f.querySelector(`[name="${el.name}"]:checked`)) return err('Выберите вариант: ' + el.closest('.f').querySelector('.l').textContent, el.closest('.f')); }
+    else if (el.type === 'checkbox') { if (!el.checked) return err('Нужно согласие на обработку данных', el); }
+    else if (!el.value.trim()) return err('Заполните поле: ' + (el.labels[0]||{}).textContent, el);
+  }
+  if (!f.querySelector('[name=booking_now]:checked')) return err('Отметьте, как к вам сейчас записываются', f.querySelector('[name=booking_now]').closest('.f'));
+  let total = 0, n = 0; for (const i of f.querySelectorAll('input[type=file]')) for (const x of i.files) { total += x.size; n++; }
+  if (total > MAXB) return err('Файлы весят больше 25 МБ. Уберите часть — остальное пришлёте в мессенджер.');
+  if (n > 20) return err('Слишком много файлов (максимум 20).');
+  btn.disabled = true; btn.textContent = 'Отправляем…';
+  const prog = document.getElementById('prog'); prog.style.display = 'block';
+  const xhr = new XMLHttpRequest(); xhr.open('POST', API);
+  xhr.upload.onprogress = ev => { if (ev.lengthComputable) prog.firstElementChild.style.width = (ev.loaded / ev.total * 100) + '%'; };
+  xhr.onload = () => {
+    let r = {}; try { r = JSON.parse(xhr.responseText); } catch (_) {}
+    if (xhr.status === 200 && r.ok) { document.getElementById('formbox').style.display = 'none'; document.getElementById('cid').textContent = r.id; document.getElementById('done').style.display = 'block'; scrollTo(0, 0); }
+    else { btn.disabled = false; btn.textContent = 'Отправить анкету'; prog.style.display = 'none'; err(r.error || 'Не получилось отправить. Попробуйте ещё раз через минуту.'); }
+  };
+  xhr.onerror = () => { btn.disabled = false; btn.textContent = 'Отправить анкету'; prog.style.display = 'none'; err('Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.'); };
+  xhr.send(new FormData(f));
+});
+</script>
+</body>
+</html>
