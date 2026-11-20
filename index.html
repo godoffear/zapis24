@@ -3,406 +3,309 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Запись24 — администратор салона в Telegram, который отвечает 24/7</title>
-<meta name="description" content="Бот-администратор для салонов красоты, студий маникюра и бровей: отвечает клиентам 24/7, напоминает о визите, собирает отзывы и зовёт клиентов вернуться. Работает с YCLIENTS и DIKIDI. 14 дней бесплатно.">
-<meta property="og:title" content="Запись24 — ни одна заявка не останется без ответа">
-<meta property="og:description" content="Бот-администратор для салонов: отвечает 24/7, записывает, напоминает о визите. 14 дней бесплатно.">
-<meta name="theme-color" content="#f7f3ee">
+<title>Запись24 — ваши клиенты больше не теряются</title>
+<meta name="description" content="Помощник администратора в Telegram для салонов красоты: отвечает клиентам 24/7, напоминает о визите, собирает отзывы и зовёт вернуться. Работает с YCLIENTS и DIKIDI. 14 дней бесплатно.">
+<meta name="theme-color" content="#fbf5ef">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#f7f3ee; --paper:#fffdfa; --ink:#231a1f; --ink2:#4a3d43; --mut:#7d7076;
-  --line:#e7ded5; --wine:#7a2e4d; --wine-d:#5e2139; --blush:#f1e1e3; --sage:#3f7a5e;
-  --r:18px; --r-sm:12px;
-  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Onest",system-ui,sans-serif;
-  --fs-body:clamp(16px,0.35vw + 15px,18px);
-}
+:root{--cream:#fbf5ef;--paper:#fffdfa;--ink:#2a1722;--ink2:#5a4650;--mut:#6f5f68;--line:#eadfd6;
+--wine:#8a1f4d;--wine-d:#6a1439;--peach:#ffd9c2;--rose:#ffc7d6;--sage:#cfe5d6;--sage-d:#2f6b4f;--lilac:#e5d9f7;--sun:#ffe9a8;
+--serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:var(--sans);font-size:var(--fs-body);line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
-img{max-width:100%}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--wine);outline-offset:3px;border-radius:6px}
-.wrap{width:min(1160px,100% - 40px);margin-inline:auto}
-h1,h2,h3{font-weight:600;text-wrap:balance}
-h1,h2{font-family:var(--serif);letter-spacing:-.01em;line-height:1.05}
-h1{font-size:clamp(42px,5.6vw,76px)}
-h2{font-size:clamp(34px,4vw,54px);margin-bottom:16px}
-h3{font-size:19px;line-height:1.3}
-p{text-wrap:pretty}
-.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wine);margin-bottom:18px;display:block}
-.lead{font-size:clamp(18px,1vw + 14px,21px);color:var(--ink2);max-width:34ch}
-.sub{color:var(--ink2);max-width:60ch;margin-bottom:48px;font-size:clamp(17px,.5vw + 15px,19px)}
-em.w{font-style:italic;color:var(--wine)}
-
-/* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font:600 16px/1 var(--sans);text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:background .2s,transform .2s,border-color .2s}
-.btn-p{background:var(--wine);color:#fff}
-.btn-p:hover{background:var(--wine-d);transform:translateY(-1px)}
-.btn-s{border-color:var(--ink);color:var(--ink);background:transparent}
-.btn-s:hover{background:var(--ink);color:#fff}
-.btn svg{width:18px;height:18px}
-
+body{font-family:var(--sans);color:var(--ink);background:var(--cream);font-size:17px;line-height:1.55;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--wine);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px;position:relative}
+/* blobs */
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.65;pointer-events:none;z-index:0;animation:float 14s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-24px) scale(1.08)}}
 /* header */
-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
-header.s{border-color:var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
-.logo{font-family:var(--serif);font-size:30px;font-weight:600;text-decoration:none;letter-spacing:-.01em}
-.logo span{color:var(--wine)}
-.nav ul{display:flex;gap:32px;list-style:none;font-size:15px;font-weight:500}
-.nav ul a{text-decoration:none;color:var(--ink2)}
-.nav ul a:hover{color:var(--ink)}
-.nav .btn{min-height:44px;padding:0 20px;font-size:15px}
-
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s}
+header.s{background:rgba(251,245,239,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:-.02em}.logo i{color:var(--wine);font-style:italic}
+.nav ul{display:flex;gap:30px;list-style:none;font-size:15px;font-weight:600;color:var(--ink2)}.nav ul a:hover{color:var(--wine)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--wine);color:#fff;border-radius:999px;padding:14px 26px;font-weight:700;font-size:16px;min-height:48px;transition:transform .2s,box-shadow .2s,background .2s;box-shadow:0 8px 24px -8px rgba(138,31,77,.55)}
+.btn:hover{transform:translateY(-2px);background:var(--wine-d);box-shadow:0 14px 30px -10px rgba(138,31,77,.6)}
+.btn.o{background:transparent;color:var(--wine);box-shadow:inset 0 0 0 2px var(--wine)}.btn.o:hover{background:var(--wine);color:#fff}
+.btn.s{padding:10px 20px;min-height:42px;font-size:14px}
+@media(max-width:820px){.nav ul{display:none}}
+/* sections */
+section{padding:120px 0;position:relative}
+.eyebrow{display:inline-block;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--wine);background:var(--rose);border-radius:999px;padding:6px 14px;margin-bottom:22px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.025em;line-height:1.04}
+h1{font-size:clamp(46px,7.2vw,92px)}
+h2{font-size:clamp(36px,5vw,62px)}
+h1 em,h2 em{font-style:italic;color:var(--wine);font-weight:500}
+.lead{font-size:clamp(18px,2vw,22px);color:var(--ink2);max-width:560px;margin-top:26px;line-height:1.5}
+.sub{font-size:19px;color:var(--ink2);max-width:640px;margin-top:20px}
+.head-c{text-align:center}.head-c h2,.head-c .sub{margin-left:auto;margin-right:auto}
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 /* hero */
-.hero{padding:clamp(48px,7vw,96px) 0 clamp(56px,8vw,110px)}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,72px);align-items:center}
-.hero h1{margin-bottom:26px}
-.hero .lead{margin-bottom:36px}
-.cta{display:flex;gap:12px;flex-wrap:wrap}
-.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:34px;font-size:15px;color:var(--ink2)}
-.facts li{list-style:none;display:flex;align-items:center;gap:8px}
-.facts li:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sage)}
-
+.hero{padding:150px 0 90px;overflow:hidden;min-height:100vh;display:flex;align-items:center}
+.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative;z-index:1}
+.cta{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.facts{list-style:none;display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:34px;font-size:14px;font-weight:600;color:var(--ink2)}
+.facts li:before{content:"✓";color:var(--sage-d);font-weight:800;margin-right:7px}
 /* phone */
-.phone{width:100%;max-width:340px;margin-inline:auto;background:#1b1418;border-radius:42px;padding:10px;box-shadow:0 40px 80px -30px rgba(70,25,45,.45),0 0 0 1px rgba(0,0,0,.05)}
-.screen{border-radius:33px;overflow:hidden;background:#efe7df}
-.tg{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--paper);border-bottom:1px solid var(--line)}
-.ava{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font:600 17px var(--serif);background:var(--wine)}
-.ava.g{background:var(--sage);font-family:var(--sans);font-size:15px}
-.tg b{display:block;font-size:14.5px;line-height:1.2}
-.tg small{font-size:12px;color:#2f6a4e}
-.chat{display:flex;flex-direction:column;gap:7px;padding:14px 12px 18px;font-size:14px;line-height:1.42;min-height:400px}
-.m{max-width:84%;padding:8px 11px 6px;border-radius:15px;background:var(--paper);align-self:flex-start;border-bottom-left-radius:5px;box-shadow:0 1px 1px rgba(0,0,0,.04)}
-.m.u{align-self:flex-end;background:#dcefd6;border-radius:15px;border-bottom-right-radius:5px}
-.m time{display:block;text-align:right;font-size:11px;color:#6f6569;margin-top:2px}
-.card{align-self:stretch;max-width:none;border:1px solid #e2cdd5;background:#fff}
-.card .t{font-weight:600;color:var(--wine);margin-bottom:4px}
-.card dl{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:13px}
-.card dt{color:var(--mut)}
-.hero .m{opacity:0;transform:translateY(6px);animation:in .45s ease forwards}
-.hero .m:nth-child(1){animation-delay:.3s}.hero .m:nth-child(2){animation-delay:1.3s}.hero .m:nth-child(3){animation-delay:2.4s}.hero .m:nth-child(4){animation-delay:3.4s}.hero .m:nth-child(5){animation-delay:4.4s}.hero .m:nth-child(6){animation-delay:5.4s}
-@keyframes in{to{opacity:1;transform:none}}
-.rep{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:32px;max-width:900px}
-.rep-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:8px}
-.rep-h b{font-size:18px}.rep-h small{color:var(--mut);font-size:13px}
-.rep-tag{display:inline-block;background:var(--blush);color:var(--wine);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600;letter-spacing:.02em}
-.rep-g{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.rep-i{padding:22px 18px 6px 0}.rep-i+.rep-i{padding-left:18px;border-left:1px solid var(--line)}
-.rep-i .k{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--wine);font-weight:600}
-.rep-i .v{font-family:var(--serif);font-variant-numeric:lining-nums;font-size:52px;line-height:1;margin:10px 0 8px;color:var(--ink)}
-.rep-i p{font-size:14px;color:var(--ink2);margin:0}
-.rep-note{margin-top:22px;font-size:13px;color:var(--mut)}
-@media (max-width:760px){.rep{padding:22px}.rep-g{grid-template-columns:1fr 1fr}.rep-i,.rep-i+.rep-i{padding:18px 12px 6px 0;border-left:0}.rep-i:nth-child(even){padding-left:12px;border-left:1px solid var(--line)}.rep-i .v{font-size:42px}}
-@media (prefers-reduced-motion:reduce){.hero .m{animation:none;opacity:1;transform:none}html{scroll-behavior:auto}}
-
-section{padding:clamp(64px,9vw,120px) 0}
-.alt{background:var(--paper);border-block:1px solid var(--line)}
-
-/* problem — editorial list */
-.split{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:start}
-.split h2{position:sticky;top:110px}
-.rows{border-top:1px solid var(--line)}
-.row{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:30px 0;border-bottom:1px solid var(--line)}
-.row .n{font:500 34px/1 var(--serif);color:var(--wine)}
-.row h3{margin-bottom:6px;font-size:21px}
-.row p{color:var(--ink2)}
-
-/* features — asymmetric */
-.feat{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-.f{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:30px}
-.f h3{font-size:22px;margin-bottom:10px}
-.f p{color:var(--ink2)}
-.f.main{grid-column:span 4;background:var(--ink);color:#f5eee8;border-color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;min-height:260px}
-.f.main p{color:#d4c7cc;max-width:46ch}
-.f.main .big{font:500 clamp(40px,5vw,64px)/1 var(--serif);color:#fff}
-.f.side{grid-column:span 2}
-.f.third{grid-column:span 3}
-.f .k{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--wine);margin-bottom:14px;display:block}
-.f.main .k{color:#e7b9c9}
-
-/* screens */
-.shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
-.shot .phone{max-width:320px}
-.shot .chat{min-height:380px}
-.cap{max-width:320px;margin:22px auto 0}
-.cap b{display:block;font-size:18px;margin-bottom:4px}
-.cap span{color:var(--ink2);font-size:16px}
-.cap i{font-style:normal;font:500 15px var(--serif);color:var(--wine);margin-right:6px}
-
-/* steps */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink)}
-.st{padding:28px 24px 0 0}
-.st+.st{padding-left:24px;border-left:1px solid var(--line)}
-.st .n{font:500 15px var(--sans);color:var(--wine);margin-bottom:16px;display:block}
-.st h3{margin-bottom:8px;font-size:20px}
-.st p{color:var(--ink2);font-size:16px}
-.note{margin-top:36px;font-size:16px;color:var(--ink2)}
-.note b{color:var(--ink)}
-
+.phone{width:340px;max-width:100%;margin:0 auto;background:#1b1118;border-radius:50px;padding:11px;box-shadow:0 40px 80px -30px rgba(106,20,57,.55),0 0 0 2px #2d1d27 inset;position:relative}
+.phone:before{content:"";position:absolute;top:19px;left:50%;transform:translateX(-50%);width:84px;height:22px;border-radius:12px;background:#0b060a;z-index:3}
+.scr{background:#fbf5ef;border-radius:40px;overflow:hidden;display:flex;flex-direction:column;height:620px}
+.tgh{display:flex;gap:11px;align-items:center;padding:42px 16px 12px;background:#fff;border-bottom:1px solid var(--line)}
+.ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--wine),#d9487e);color:#fff;font-weight:800;display:grid;place-items:center;flex:none;font-family:var(--serif);font-size:17px}
+.tgh b{display:block;font-size:14.5px;line-height:1.2;font-weight:700}.tgh small{font-size:12px;color:var(--sage-d);font-weight:600}
+.chat{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth;scrollbar-width:none}
+.chat::-webkit-scrollbar{display:none}
+.m{max-width:86%;padding:9px 13px;border-radius:18px;font-size:14px;line-height:1.38;background:#fff;box-shadow:0 1px 2px rgba(42,23,34,.08);align-self:flex-start;border-bottom-left-radius:5px;animation:pop .35s cubic-bezier(.2,.8,.3,1.2)}
+.m.u{background:var(--wine);color:#fff;align-self:flex-end;border-bottom-left-radius:18px;border-bottom-right-radius:5px}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+.m.card{max-width:100%;width:100%;background:var(--sage);border-radius:16px;box-shadow:none}
+.m.card .t{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sage-d);margin-bottom:6px}
+.m.card dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:13px}.m.card dt{color:#4a7a63}.m.card dd{font-weight:700}
+.typing{display:inline-flex;gap:4px;padding:12px 14px}.typing i{width:7px;height:7px;border-radius:50%;background:#b9a7b0;animation:bl 1.1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,60%,100%{opacity:.3;transform:none}30%{opacity:1;transform:translateY(-4px)}}
+.chips{display:flex;gap:7px;flex-wrap:wrap;padding:10px 12px 14px;background:#fff;border-top:1px solid var(--line)}
+.chip{font:inherit;font-size:13px;font-weight:700;border:0;background:var(--peach);color:var(--wine-d);padding:9px 14px;border-radius:999px;cursor:pointer;min-height:38px;transition:.15s}
+.chip:hover{background:var(--rose);transform:translateY(-1px)}.chip[disabled]{opacity:.4;pointer-events:none}
+.demo-note{text-align:center;font-size:12.5px;color:var(--mut);margin-top:16px;font-weight:600}
+.badge-float{position:absolute;z-index:4;background:#fff;border-radius:16px;padding:10px 14px;font-size:13px;font-weight:700;box-shadow:0 14px 30px -10px rgba(42,23,34,.3);animation:float 7s ease-in-out infinite}
+/* pain */
+.pains{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:64px}
+.pain{border-radius:28px;padding:30px 26px;min-height:300px;display:flex;flex-direction:column;transition:transform .35s}
+.pain:hover{transform:translateY(-8px) rotate(-.6deg)}
+.pain .n{font-family:var(--serif);font-size:64px;line-height:1;font-style:italic;color:var(--wine);opacity:.55}
+.pain h3{font-size:24px;margin:auto 0 10px;line-height:1.12;text-wrap:balance;display:block;margin:auto 0 10px}
+.pain p{font-size:15px;color:#3d2a34;line-height:1.45;height:7.25em}
+.p1{background:var(--peach)}.p2{background:var(--sun)}.p3{background:var(--lilac)}.p4{background:var(--rose)}
+/* journey (dark) */
+.dark{background:var(--ink);color:#fbf5ef;overflow:hidden;border-radius:56px;margin:0 14px}
+.dark .eyebrow{background:rgba(255,199,214,.16);color:var(--rose)}
+.dark h2 em{color:var(--rose)}.dark .sub{color:#cdb9c3}
+.steps4{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:70px;position:relative}
+.steps4:before{content:"";position:absolute;left:8%;right:8%;top:31px;height:2px;background:linear-gradient(90deg,#5a3a4a,var(--rose),#5a3a4a);opacity:.7}
+.stp{padding:0 14px;text-align:center;position:relative;display:flex;flex-direction:column;align-items:center}.stp .tag{margin-top:auto}.stp p{margin-bottom:16px}
+.stp .dot{width:62px;height:62px;border-radius:50%;background:var(--wine);color:#fff;font-family:var(--serif);font-size:26px;font-weight:600;display:grid;place-items:center;margin:0 auto 22px;box-shadow:0 0 0 8px var(--ink),0 0 0 10px #5a3a4a;position:relative;z-index:1;transition:.3s}
+.stp:hover .dot{background:var(--rose);color:var(--wine-d);transform:scale(1.1)}
+.stp h3{font-size:24px;margin-bottom:10px}.stp p{font-size:15px;color:#cdb9c3}
+.stp .tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--sun);border-radius:999px;padding:4px 12px}
+/* shots */
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:70px;align-items:start}
+.shot .phone{width:100%;max-width:300px}.shot .scr{height:540px}.shot .tgh{padding-top:38px}
+.shot .cap{text-align:center;margin-top:24px}.shot .cap b{display:block;font-family:var(--serif);font-size:23px;font-weight:600}.shot .cap span{color:var(--ink2);font-size:15px}
+.shot:nth-child(2){margin-top:46px}
+.shot .m{animation:none}
+/* report */
+.rep{background:var(--paper);border-radius:36px;padding:48px;box-shadow:0 30px 70px -40px rgba(106,20,57,.35);margin-top:60px;position:relative;z-index:1}
+.rep-h{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:24px;border-bottom:2px dashed var(--line)}
+.rep-h b{font-family:var(--serif);font-size:26px}.rep-h small{color:var(--mut);font-size:14px;display:block;margin-top:2px}
+.tag2{background:var(--sun);color:#6b4b00;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:6px 14px}
+.rep-g{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:30px}
+.rep-i{border-radius:24px;padding:26px 22px}
+.rep-i:nth-child(1){background:var(--peach)}.rep-i:nth-child(2){background:var(--sage)}.rep-i:nth-child(3){background:var(--lilac)}.rep-i:nth-child(4){background:var(--rose)}
+.rep-i .k{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.rep-i .v{font-family:var(--serif);font-size:76px;font-weight:600;line-height:1;margin:10px 0;color:var(--ink)}
+.rep-i p{font-size:14px;color:var(--ink2);line-height:1.42}
+.rep-note{margin-top:24px;font-size:13px;color:var(--mut)}
+/* steps launch */
+.launch{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:60px}
+.lc{background:var(--paper);border-radius:26px;padding:28px 24px;border:1.5px dashed #d9c9bd;transition:.3s}
+.lc:hover{border-style:solid;border-color:var(--wine);transform:translateY(-6px)}
+.lc .n{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--wine)}
+.lc h3{font-size:24px;margin:10px 0 8px}.lc p{font-size:15px;color:var(--ink2)}
 /* compare */
-.cmp{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;font-size:16px}
-.cmp th,.cmp td{padding:18px 22px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
-.cmp tr:last-child td{border-bottom:0}
-.cmp thead th{font-size:14px;font-weight:600;color:var(--mut);background:var(--bg)}
-.cmp thead th:last-child{color:var(--wine)}
-.cmp td:first-child{font-weight:500;width:38%}
+.cmp{width:100%;margin-top:50px;border-collapse:separate;border-spacing:0 10px;text-align:left}
+.cmp th{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);padding:0 20px 6px}
+.cmp th:last-child{color:var(--wine)}
+.cmp td{background:var(--paper);padding:20px;vertical-align:top;font-size:16px}
+.cmp td:first-child{border-radius:18px 0 0 18px;font-weight:700;width:38%}.cmp td:last-child{border-radius:0 18px 18px 0;background:var(--sage);font-weight:700;color:#1d4a35}
 .cmp td:nth-child(2){color:var(--mut)}
-.cmp td:last-child{font-weight:600}
-.cmp td:last-child:before{content:"✓ ";color:var(--sage)}
-
 /* pricing */
-.ptop{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
-.ptop .sub{margin-bottom:0}
-.seg{display:inline-flex;padding:5px;background:var(--paper);border:1px solid var(--line);border-radius:999px}
-.seg button{white-space:nowrap;border:0;background:none;font:600 15px var(--sans);color:var(--ink2);min-height:42px;padding:0 18px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.2s}
-.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
-.seg em{font-style:normal;font-size:12px;font-weight:700;color:var(--sage);background:#e3efe8;padding:3px 7px;border-radius:99px}
-.seg button[aria-pressed=true] em{background:#3c5f4e;color:#e3efe8}
-.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
-.plan{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:32px 30px;display:flex;flex-direction:column}
-.plan.hit{background:var(--ink);color:#f5eee8;border-color:var(--ink);position:relative}
-.badge{position:absolute;top:22px;right:22px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--wine);color:#fff;padding:6px 11px;border-radius:99px}
-.plan h3{font:600 30px/1.1 var(--serif)}
-.plan .for{font-size:15px;color:var(--mut);margin:6px 0 26px}
-.plan.hit .for{color:#bfb0b6}
-.amt{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
-.amt .v{font:600 clamp(44px,4vw,56px)/1 var(--serif);letter-spacing:-.01em}
-.amt .u{font-size:16px;color:var(--mut)}
-.plan.hit .amt .u{color:#bfb0b6}
-.amt s{font-size:17px;color:var(--mut);margin-left:4px}
-.bill{font-size:14px;color:var(--mut);min-height:22px;margin-top:8px}
-.plan.hit .bill{color:#cdbfc4}
-.startp{margin:20px 0 24px;padding:14px 16px;border-radius:var(--r-sm);background:var(--bg);font-size:14.5px;color:var(--ink2)}
-.plan.hit .startp{background:#33282d;color:#dccfd4}
-.startp b{color:var(--ink)}
-.plan.hit .startp b{color:#fff}
-.plan ul{list-style:none;display:grid;gap:11px;margin-bottom:30px;flex:1;font-size:16px}
-.plan li{display:grid;grid-template-columns:20px 1fr;gap:10px}
-.plan li:before{content:"";width:16px;height:16px;margin-top:4px;border-radius:50%;background:var(--blush) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%237a2e4d' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
-.plan.hit li:before{background-color:#4a2a37;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-5' fill='none' stroke='%23f1c4d4' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
-.plan .btn{width:100%}
-.plan.hit .btn-p{background:#fff;color:var(--ink)}
-.plan.hit .btn-p:hover{background:var(--blush)}
-.pfoot{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-top:16px}
-.pbox{border:1px solid var(--line);border-radius:22px;padding:26px 30px;background:var(--paper)}
-.pbox h3{font-size:18px;margin-bottom:8px}
-.pbox p,.pbox li{color:var(--ink2);font-size:16px}
-.pay{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;list-style:none}
-.pay li{border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14.5px;font-weight:500;color:var(--ink);background:var(--bg)}
-.trial{background:var(--blush);border-color:#e6c9cf}
-.trial h3{font:600 26px/1.15 var(--serif);color:var(--wine-d)}
-
+.seg{display:inline-flex;background:#efe4da;border-radius:999px;padding:4px;margin-top:34px}
+.seg button{border:0;background:transparent;font:inherit;font-weight:700;font-size:14px;padding:10px 22px;border-radius:999px;cursor:pointer;color:var(--ink2);min-height:42px;transition:.2s}
+.seg button[aria-pressed=true]{background:#fff;color:var(--wine);box-shadow:0 4px 14px rgba(42,23,34,.15)}
+.seg em{font-style:normal;color:var(--sage-d);font-size:12px;margin-left:5px;font-weight:800}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px;align-items:stretch}
+.plan{background:var(--paper);border-radius:32px;padding:38px 30px;display:flex;flex-direction:column;position:relative;transition:transform .3s}
+.plan:hover{transform:translateY(-6px)}
+.plan.hit{background:var(--ink);color:#fbf5ef;transform:scale(1.04);box-shadow:0 40px 80px -30px rgba(42,23,34,.6)}.plan.hit:hover{transform:scale(1.04) translateY(-6px)}
+.badge{position:absolute;top:-14px;left:30px;background:var(--sun);color:#5e4300;font-size:12px;font-weight:800;border-radius:999px;padding:6px 14px;letter-spacing:.04em}
+.plan h3{font-size:30px}.plan .for{font-size:14px;color:var(--mut);margin-top:6px;min-height:44px}.plan.hit .for{color:#cdb9c3}
+.amt{margin-top:18px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.amt .v{font-family:var(--serif);font-size:52px;font-weight:600;line-height:1}.amt .u{color:var(--mut)}.plan.hit .u,.plan.hit s,.plan.hit .bill{color:#cdb9c3}.amt s{color:var(--mut);font-size:15px}
+.bill{font-size:14px;color:var(--mut);margin-top:4px}.startp{font-size:14px;margin-top:16px;padding-top:16px;border-top:1.5px dashed var(--line)}.plan.hit .startp{border-color:#5a3a4a}
+.plan ul{list-style:none;margin:20px 0 28px;font-size:15px}.plan li{padding:6px 0 6px 28px;position:relative}.plan li:before{content:"✦";position:absolute;left:0;color:var(--wine);font-size:14px}.plan.hit li:before{color:var(--rose)}
+.plan .btn{margin-top:auto;justify-content:center}.plan.hit .btn{background:var(--rose);color:var(--wine-d);box-shadow:none}
+.pfoot{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;margin-top:22px}
+.pbox{background:var(--paper);border-radius:26px;padding:30px}.pbox.trial{background:var(--sage)}.pbox h3{font-size:23px;margin-bottom:8px}.pbox p{font-size:15px;color:var(--ink2)}.pbox ul{list-style:none;margin-top:8px;font-size:15px}.pbox li{padding:3px 0}
 /* faq */
-.faq .split h2{top:110px}
-details{border-bottom:1px solid var(--line)}
-details:first-of-type{border-top:1px solid var(--line)}
-summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-weight:600;font-size:18px;min-height:44px}
+.faq .wrap{max-width:820px}.faq h2{margin-bottom:46px}
+details{background:var(--paper);border-radius:22px;margin-bottom:12px;transition:.3s;box-shadow:0 1px 0 var(--line)}
+details[open]{box-shadow:0 20px 40px -26px rgba(106,20,57,.4)}
+summary{cursor:pointer;list-style:none;padding:22px 64px 22px 26px;font-weight:700;font-size:18px;position:relative;line-height:1.35}
 summary::-webkit-details-marker{display:none}
-summary:after{content:"";flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 3v10M3 8h10' stroke='%23231a1f' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .25s}
-details[open] summary:after{transform:rotate(45deg)}
-details p{color:var(--ink2);padding:0 48px 24px 0;max-width:68ch}
-
+summary:after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:var(--peach);color:var(--wine);display:grid;place-items:center;font-size:22px;font-weight:600;transition:.3s}
+details[open] summary:after{transform:translateY(-50%) rotate(45deg);background:var(--wine);color:#fff}
+details p{padding:0 26px 24px;color:var(--ink2);font-size:16.5px}
 /* final */
-.final{background:var(--ink);color:#f5eee8;border-radius:28px;padding:clamp(40px,6vw,80px);display:grid;grid-template-columns:1.3fr auto;gap:32px;align-items:center}
-.final h2{color:#fff;margin-bottom:12px}
-.final p{color:#d4c7cc;max-width:48ch}
-.final .btn-p{background:#fff;color:var(--ink)}
-.final .btn-p:hover{background:var(--blush)}
-.final .ask{margin-top:18px;font-size:16px;color:#d4c7cc}
-.final .askb{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.final .askb .btn{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
-.final .askb .btn:hover{background:rgba(255,255,255,.1)}
-
-footer{padding:40px 0 56px;font-size:14px;color:var(--mut)}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:28px}
-footer nav{display:flex;gap:22px;flex-wrap:wrap}
-footer a{text-decoration:none}
-footer a:hover{color:var(--ink)}
-
-/* mobile sticky cta */
+.final{background:linear-gradient(135deg,var(--wine),#c23c78);color:#fff;border-radius:56px;margin:0 14px;overflow:hidden;text-align:center;padding:110px 0}
+.final h2{color:#fff}.final h2 em{color:var(--sun)}.final .sub{color:#ffe3ec;margin:20px auto 0}
+.final .btn{background:#fff;color:var(--wine);box-shadow:0 14px 40px -12px rgba(0,0,0,.4)}.final .btn:hover{background:var(--sun)}
+.final .btn.o{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}.final .btn.o:hover{background:#fff;color:var(--wine)}
+.final .cta{justify-content:center}.final .ask{margin-top:34px;color:#ffe3ec;font-weight:600}
+footer{padding:46px 0 40px;font-size:13.5px;color:var(--mut)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px}footer a:hover{color:var(--wine)}
 .mcta{display:none}
-
-@media (max-width:1000px){
-  .nav ul{display:none}
-  .hero .wrap,.split,.final{grid-template-columns:1fr}
-  .split h2{position:static}
-  .feat{grid-template-columns:1fr 1fr}
-  .f.main{grid-column:1/-1}.f.side,.f.third{grid-column:span 1}
-  .shots{grid-template-columns:1fr;gap:56px}
-  .steps{grid-template-columns:1fr 1fr;border-top:0}
-  .st,.st+.st{padding:24px 0;border-left:0;border-top:1px solid var(--line)}
-  .st:nth-child(even){padding-left:20px}
-  .plans,.pfoot{grid-template-columns:1fr}
-  .plan.hit{order:-1}
+@media(max-width:1000px){
+ .hero .grid{grid-template-columns:1fr;gap:50px;text-align:center}.hero .lead{margin-left:auto;margin-right:auto}.cta,.facts{justify-content:center}
+ .pains,.launch{grid-template-columns:1fr 1fr}.steps4{grid-template-columns:1fr 1fr;gap:44px 0}.steps4:before{display:none}
+ .shots{grid-template-columns:1fr;justify-items:center;gap:56px}.shot:nth-child(2){margin-top:0}
+ .rep-g{grid-template-columns:1fr 1fr}.plans{grid-template-columns:1fr;max-width:460px;margin-left:auto;margin-right:auto}.plan.hit{transform:none}.plan.hit:hover{transform:translateY(-6px)}
+ .pfoot{grid-template-columns:1fr}
 }
-@media (max-width:640px){
-  .wrap{width:min(1160px,100% - 32px)}
-  .nav{height:64px}.logo{font-size:26px}
-  .nav .btn{display:none}
-  .cta .btn{width:100%}
-  .feat{grid-template-columns:1fr}.f.side,.f.third{grid-column:1/-1}
-  .steps{grid-template-columns:1fr}.st:nth-child(even){padding-left:0}
-  .row{grid-template-columns:44px 1fr;gap:14px}.row .n{font-size:28px}
-  .cmp thead{display:none}
-  .cmp,.cmp tbody,.cmp tr,.cmp td{display:block;width:100%}
-  .cmp tr{padding:16px 18px;border-bottom:1px solid var(--line)}
-  .cmp td{padding:2px 0;border:0;width:auto!important}
-  .cmp td:nth-child(2):before{content:"Обычно: "}
-  .seg{width:100%}.l6{font-size:0}.l6:after{content:"6 мес";font-size:14px}.seg button{flex:1;justify-content:center;padding:0 8px;font-size:14px}
-  .plan{padding:28px 22px}
-  details p{padding-right:0}
-  .final{border-radius:22px}.final .btn{width:100%}
-  .mcta{display:flex;position:fixed;left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:30;transform:translateY(140%);transition:transform .3s}
-  .mcta.on{transform:none}
-  .mcta .btn{width:100%;box-shadow:0 12px 30px -10px rgba(70,25,45,.6)}
-  footer{padding-bottom:100px}
+@media(max-width:640px){
+ body{padding-bottom:84px}
+ section{padding:80px 0}.hero{padding:104px 0 60px}.dark,.final{border-radius:36px;margin:0 8px}.final{padding:80px 0}
+ .pains,.launch,.steps4{grid-template-columns:1fr}.pain{min-height:0;display:flex;flex-direction:column}.pain h3{margin-top:30px}.pain p{height:auto}
+ .rep{padding:26px 20px;border-radius:28px}.rep-i .v{font-size:56px}
+ .cmp,.cmp tbody,.cmp tr,.cmp td{display:block;width:100%}.cmp thead{display:none}.cmp tr{margin-bottom:12px}.cmp td{border-radius:0!important;padding:12px 18px}.cmp td:first-child{border-radius:18px 18px 0 0!important;width:100%}.cmp td:last-child{border-radius:0 0 18px 18px!important}.cmp td:nth-child(2):before{content:"Обычно: "}.cmp td:last-child:before{content:"Запись24: "}
+ .badge-float{display:none}
+ .mcta{display:block;position:fixed;left:14px;right:14px;bottom:14px;z-index:40;opacity:0;transform:translateY(24px);pointer-events:none;transition:.3s}.mcta.on{opacity:1;transform:none;pointer-events:auto}.mcta .btn{display:flex;justify-content:center;width:100%}
 }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-
 <header id="hd"><div class="wrap nav">
-  <a class="logo" href="#top" aria-label="Запись24 — на главную">Запись<span>24</span></a>
-  <ul>
-    <li><a href="#how">Как работает</a></li>
-    <li><a href="#price">Тарифы</a></li>
-    <li><a href="#faq">Вопросы</a></li>
-  </ul>
-  <a class="btn btn-p" href="https://t.me/zapis24demo_bot" target="_blank" rel="noopener">Попробовать демо</a>
+  <a class="logo" href="#top">Запись<i>24</i></a>
+  <ul><li><a href="#how">Как работает</a></li><li><a href="#price">Тарифы</a></li><li><a href="#faq">Вопросы</a></li></ul>
+  <a class="btn s" href="https://t.me/zapis24demo_bot" target="_blank" rel="noopener">Демо в Telegram</a>
 </div></header>
 
 <main id="top">
-<section class="hero"><div class="wrap">
-  <div>
-    <span class="eyebrow">Для салонов красоты и студий</span>
-    <h1>Ваши клиенты больше не&nbsp;теряются <em class="w">между сообщениями и&nbsp;визитами.</em></h1>
-    <p class="lead">Запись24 — помощник администратора в Telegram. Отвечает клиентам за секунды днём и ночью, напоминает о визите, узнаёт, всё ли понравилось, и зовёт вернуться, когда пора. Работает вместе с вашим YCLIENTS или DIKIDI.</p>
-    <div class="cta">
-      <a class="btn btn-p" href="https://t.me/zapis24demo_bot" target="_blank" rel="noopener">Попробовать демо как клиент
-        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="btn btn-s" href="#price">Тарифы</a>
+<section class="hero">
+  <div class="blob" style="width:420px;height:420px;background:var(--rose);top:60px;left:-120px"></div>
+  <div class="blob" style="width:380px;height:380px;background:var(--peach);bottom:-80px;right:20%;animation-delay:-5s"></div>
+  <div class="blob" style="width:300px;height:300px;background:var(--lilac);top:10%;right:-80px;animation-delay:-9s"></div>
+  <div class="wrap"><div class="grid">
+    <div>
+      <span class="eyebrow rv">Для салонов красоты и студий</span>
+      <h1 class="rv d1">Клиенты больше <em>не теряются.</em></h1>
+      <p class="lead rv d2">Помощник администратора в Telegram. Отвечает за секунды днём и ночью, напоминает о визите, узнаёт, всё ли понравилось, и зовёт вернуться, когда пора. Работает вместе с вашим YCLIENTS или DIKIDI.</p>
+      <div class="cta rv d3"><a class="btn" href="https://t.me/zapis24demo_bot" target="_blank" rel="noopener">Попробовать в Telegram →</a><a class="btn o" href="#price">Тарифы</a></div>
+      <ul class="facts rv d3"><li>14 дней бесплатно</li><li>Настроим за 2–3 дня</li><li>Без договора на год</li></ul>
     </div>
-    <ul class="facts"><li>14 дней бесплатно</li><li>Настраиваем сами за 2–3 дня</li><li>Без договора на год</li></ul>
-  </div>
-  <div class="phone" role="img" aria-label="Пример переписки клиента с ботом салона"><div class="screen">
-    <div class="tg"><div class="ava">Л</div><div><b>Nail Studio «Лаванда»</b><small>онлайн</small></div></div>
-    <div class="chat">
-      <div class="m u">Здравствуйте! Сколько стоит маникюр с покрытием?<time>23:40</time></div>
-      <div class="m">Добрый вечер! Маникюр с гель-лаком — 2 200 ₽, с укреплением — 2 600 ₽. Для новых гостей скидка 15%. Подобрать время?<time>23:40</time></div>
-      <div class="m u">Да, в субботу к Марии часа в три можно?<time>23:41</time></div>
-      <div class="m">В субботу в 15:00 у Марии есть окно — записываю. Подскажите, пожалуйста, имя и телефон.<time>23:41</time></div>
-      <div class="m u">Ольга, 8 914 000-11-22<time>23:42</time></div>
-      <div class="m card"><div class="t">Новая заявка · отправлена администратору</div>
-        <dl><dt>Клиент</dt><dd>Ольга, 8 914 000-11-22</dd><dt>Услуга</dt><dd>Маникюр + гель-лак</dd><dt>Мастер</dt><dd>Мария</dd><dt>Время</dt><dd>Суббота, 15:00</dd></dl></div>
+    <div class="rv d2" style="position:relative">
+      <div class="badge-float" style="top:-6px;left:-18px">ответ за 5 секунд</div>
+      <div class="badge-float" style="bottom:110px;right:-26px;animation-delay:-3s">новая заявка</div>
+      <div class="phone" aria-label="Интерактивная демонстрация переписки с ботом"><div class="scr">
+        <div class="tgh"><div class="ava">Л</div><div><b>Nail Studio «Лаванда»</b><small>● онлайн</small></div></div>
+        <div class="chat" id="chat" aria-live="polite"></div>
+        <div class="chips" id="chips"></div>
+      </div></div>
+      <p class="demo-note">Нажмите на вопрос — бот ответит. Это демонстрация, настоящий бот — в Telegram.</p>
     </div>
   </div></div>
-</div></section>
-
-<section class="alt"><div class="wrap split">
-  <h2>Салон теряет клиентов в&nbsp;четырёх местах&nbsp;— и&nbsp;не&nbsp;замечает этого</h2>
-  <div class="rows">
-    <div class="row"><span class="n">01</span><div><h3>Сообщение без ответа</h3><p>Клиентка написала вечером или пока мастер занят. Ответ пришёл утром — а она уже записалась в соседний салон.</p></div></div>
-    <div class="row"><span class="n">02</span><div><h3>Не пришла и не предупредила</h3><p>Забыла или передумала. Окно пропало, мастер сидит без работы, а на это время мог прийти другой клиент.</p></div></div>
-    <div class="row"><span class="n">03</span><div><h3>Ушла недовольной — молча</h3><p>Вы узнаёте об этом из плохого отзыва в 2ГИС. Или не узнаёте вовсе — она просто больше не приходит.</p></div></div>
-    <div class="row"><span class="n">04</span><div><h3>Не вернулась вовремя</h3><p>Коррекция нужна через 3–4 недели. Если не напомнить, клиентка легко уходит к другому мастеру — и это самая большая потеря.</p></div></div>
-  </div>
-</div></section>
+</section>
 
 <section><div class="wrap">
-  <span class="eyebrow">Что делает Запись24</span>
-  <h2>Сопровождает клиента на&nbsp;всём пути&nbsp;— от&nbsp;первого сообщения до&nbsp;повторного визита</h2>
-  <p class="sub">Запись в YCLIENTS остаётся как есть. Мы закрываем то, что между записями: переписку, напоминания, отзывы и возвраты.</p>
-  <div class="feat">
-    <div class="f main"><span class="k">Ответ</span><div><div class="big">Отвечает за секунды, 24/7</div><p style="margin-top:14px">Цены, услуги, мастера, адрес, свободное время — бот знает всё о вашем салоне, понимает обычные сообщения и доводит разговор до записи. Вам — готовая заявка.</p></div></div>
-    <div class="f side"><span class="k">Меньше неявок</span><h3>Напоминает и подтверждает</h3><p>За день до визита: «Приду / Перенести / Отменить». Если клиент отменил — вы сразу знаете, что окно свободно.</p></div>
-    <div class="f third"><span class="k">Обратная связь</span><h3>Узнаёт, всё ли понравилось</h3><p>Довольных просит оставить отзыв в 2ГИС или на Яндекс Картах. Если оценка низкая — сразу сообщает владельцу, чтобы успеть исправить.</p></div>
-    <div class="f third"><span class="k">Возврат</span><h3>Зовёт вернуться вовремя</h3><p>С согласия клиента напоминает, когда пора на коррекцию или повторную процедуру, — до того, как он уйдёт к другому мастеру.</p></div>
+  <div class="head-c"><span class="eyebrow rv">Где теряются клиенты</span>
+  <h2 class="rv d1">Салон теряет клиентов в четырёх местах — <em>и не замечает.</em></h2></div>
+  <div class="pains">
+    <div class="pain p1 rv"><span class="n">01</span><h3>Сообщение без ответа</h3><p>Клиентка написала вечером или пока мастер занят. Ответ пришёл утром — а она уже записалась в соседний салон.</p></div>
+    <div class="pain p2 rv d1"><span class="n">02</span><h3>Не пришла, не предупредила</h3><p>Забыла или передумала. Окно пропало, мастер сидит без работы, а на это время мог прийти другой клиент.</p></div>
+    <div class="pain p3 rv d2"><span class="n">03</span><h3>Ушла и ничего не сказала</h3><p>Вы узнаёте об этом из плохого отзыва в 2ГИС. Или не узнаёте вовсе — она просто больше не приходит.</p></div>
+    <div class="pain p4 rv d3"><span class="n">04</span><h3>Не вернулась вовремя</h3><p>Коррекция нужна через 3–4 недели. Если не напомнить, клиентка легко уходит к другому мастеру — и это самая большая потеря.</p></div>
   </div>
 </div></section>
 
-<section class="alt" id="how"><div class="wrap">
-  <span class="eyebrow">Как это выглядит</span>
-  <h2>Как клиент проходит путь с ботом</h2>
-  <p class="sub">Пример на демо-студии «Лаванда». Бот вашего салона будет работать так же — с вашими услугами, ценами и мастерами.</p>
+<section class="dark" id="how">
+  <div class="blob" style="width:380px;height:380px;background:var(--wine);top:-100px;right:-60px;opacity:.5"></div>
+  <div class="wrap">
+  <div class="head-c"><span class="eyebrow rv">Что делает Запись24</span>
+  <h2 class="rv d1">Ведёт клиента от первого сообщения <em>до повторного визита.</em></h2>
+  <p class="sub rv d2">Запись в YCLIENTS остаётся как есть. Мы закрываем то, что между записями: переписку, напоминания, отзывы и возвраты.</p></div>
+  <div class="steps4">
+    <div class="stp rv"><div class="dot">1</div><h3>Отвечает</h3><p>За секунды, 24/7. Знает цены, мастеров, адрес и свободное время — и доводит разговор до записи.</p><span class="tag">Вам — готовая заявка</span></div>
+    <div class="stp rv d1"><div class="dot">2</div><h3>Напоминает</h3><p>За день до визита: «Приду / Перенести / Отменить». Если отмена — вы сразу знаете, что окно свободно.</p><span class="tag">Меньше неявок</span></div>
+    <div class="stp rv d2"><div class="dot">3</div><h3>Спрашивает</h3><p>Довольных просит об отзыве в 2ГИС и на Картах. Если оценка низкая — сразу сообщает владельцу.</p><span class="tag">Успеть исправить</span></div>
+    <div class="stp rv d3"><div class="dot">4</div><h3>Зовёт вернуться</h3><p>С согласия клиента напоминает, когда пора на коррекцию — до того, как уйдёт к другому мастеру.</p><span class="tag">Клиенты возвращаются</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap" style="max-width:1200px">
+  <div class="head-c"><span class="eyebrow rv">Как это выглядит</span>
+  <h2 class="rv d1">Путь клиента <em>с ботом.</em></h2>
+  <p class="sub rv d2">Пример на демо-студии «Лаванда». Бот вашего салона будет работать так же — с вашими услугами, ценами и мастерами.</p></div>
   <div class="shots">
-    <div class="shot">
-      <div class="phone"><div class="screen">
-        <div class="tg"><div class="ava">Л</div><div><b>Nail Studio «Лаванда»</b><small>онлайн</small></div></div>
-        <div class="chat">
-          <div class="m u">А наращивание делаете? Сколько по времени?<time>21:15</time></div>
-          <div class="m">Да! Наращивание — 3 500 ₽, около 2,5 часа. Делает мастер Мария, она работает со среды по воскресенье.<time>21:15</time></div>
-          <div class="m u">А в воскресенье утром есть?<time>21:16</time></div>
-          <div class="m">Могу записать на воскресенье, 10:00. Как вас зовут и ваш телефон?<time>21:16</time></div>
-          <div class="m u">Катя, 8 950 123-45-67<time>21:17</time></div>
-          <div class="m">Катя, записала вас на воскресенье в 10:00 к Марии. Ждём по адресу: ул. Карла Маркса, 25.<time>21:17</time></div>
-        </div>
-      </div></div>
-      <div class="cap"><b><i>01</i>Клиентка пишет вечером</b><span>Бот отвечает по вашему прайсу и записывает.</span></div>
-    </div>
-    <div class="shot">
-      <div class="phone"><div class="screen">
-        <div class="tg"><div class="ava g">А</div><div><b>Администратор салона</b><small>ваш Telegram</small></div></div>
-        <div class="chat">
-          <div class="m card"><div class="t">Новая заявка — «Лаванда»</div>
-            <dl><dt>Клиент</dt><dd>Катя, 8 950 123-45-67</dd><dt>Услуга</dt><dd>Наращивание ногтей</dd><dt>Мастер</dt><dd>Мария</dd><dt>Время</dt><dd>Вс, 10:00</dd><dt>Telegram</dt><dd>@katya_irk</dd></dl><time>21:17</time></div>
-          <div class="m card"><div class="t">Новая заявка — «Лаванда»</div>
-            <dl><dt>Клиент</dt><dd>Ольга, 8 914 000-11-22</dd><dt>Услуга</dt><dd>Маникюр + гель-лак</dd><dt>Мастер</dt><dd>Анна</dd><dt>Время</dt><dd>Пн, 12:30</dd></dl><time>02:05</time></div>
-        </div>
-      </div></div>
-      <div class="cap"><b><i>02</i>Вам приходит готовая заявка</b><span>Мгновенно в Telegram и строкой в Google-таблицу. Даже в два часа ночи.</span></div>
-    </div>
-    <div class="shot">
-      <div class="phone"><div class="screen">
-        <div class="tg"><div class="ava">Л</div><div><b>Nail Studio «Лаванда»</b><small>онлайн</small></div></div>
-        <div class="chat">
-          <div class="m">Катя, здравствуйте! Напоминаем: завтра в 10:00 у вас наращивание у Марии, ул. Карла Маркса, 25. Всё в силе?<time>сб, 10:00</time></div>
-          <div class="m u">✅ Приду<time>сб, 10:12</time></div>
-          <div class="m">Катя, спасибо, что были у нас! Как вам наращивание? Будем благодарны за отзыв в 2ГИС — это минута, а мастерам очень помогает.<time>вс, 15:30</time></div>
-          <div class="m u">Всё супер, оставила ★★★★★<time>вс, 15:41</time></div>
-          <div class="m">Катя, прошло 3 недели — пора на коррекцию? У Марии есть окно в четверг в 18:00.<time>через 3 нед.</time></div>
-        </div>
-      </div></div>
-      <div class="cap"><b><i>03</i>Напоминание, отзыв, возврат</b><span>Меньше неявок, больше отзывов, клиенты возвращаются вовремя.</span></div>
-    </div>
+    <div class="shot rv"><div class="phone"><div class="scr">
+      <div class="tgh"><div class="ava">Л</div><div><b>Nail Studio «Лаванда»</b><small>● онлайн</small></div></div>
+      <div class="chat" style="overflow:hidden">
+        <div class="m u">Наращивание делаете? Сколько по времени?</div>
+        <div class="m">Да! Наращивание — 3 500 ₽, около 2,5 часа. Делает Мария, она работает со среды по воскресенье.</div>
+        <div class="m u">А в воскресенье утром есть?</div>
+        <div class="m">Могу на воскресенье, 10:00. Ваше имя и телефон?</div>
+        <div class="m u">Катя, 8 950 123-45-67</div>
+        <div class="m">Записала на воскресенье, 10:00. Ждём вас!</div>
+      </div></div></div>
+      <div class="cap"><b>Клиентка пишет вечером</b><span>Бот отвечает по вашему прайсу и записывает.</span></div></div>
+    <div class="shot rv d1"><div class="phone"><div class="scr">
+      <div class="tgh"><div class="ava" style="background:linear-gradient(135deg,#2f6b4f,#5aa882)">А</div><div><b>Администратор салона</b><small>ваш Telegram</small></div></div>
+      <div class="chat" style="overflow:hidden">
+        <div class="m card"><div class="t">Новая заявка — «Лаванда»</div><dl><dt>Клиент</dt><dd>Катя, 8 950 123-45-67</dd><dt>Услуга</dt><dd>Наращивание ногтей</dd><dt>Мастер</dt><dd>Мария</dd><dt>Время</dt><dd>Вс, 10:00</dd><dt>Telegram</dt><dd>@katya_irk</dd></dl></div>
+        <div class="m card"><div class="t">Новая заявка — «Лаванда»</div><dl><dt>Клиент</dt><dd>Ольга, 8 914 000-11-22</dd><dt>Услуга</dt><dd>Маникюр + гель-лак</dd><dt>Мастер</dt><dd>Анна</dd><dt>Время</dt><dd>Пн, 12:30</dd></dl></div>
+      </div></div></div>
+      <div class="cap"><b>Вам приходит готовая заявка</b><span>Мгновенно в Telegram и строкой в Google-таблицу. Даже в два часа ночи.</span></div></div>
+    <div class="shot rv d2"><div class="phone"><div class="scr">
+      <div class="tgh"><div class="ava">Л</div><div><b>Nail Studio «Лаванда»</b><small>● онлайн</small></div></div>
+      <div class="chat" style="overflow:hidden">
+        <div class="m">Катя, напоминаем: завтра в 10:00 наращивание у Марии. Всё в силе?</div>
+        <div class="m u">Приду ✓</div>
+        <div class="m">Катя, спасибо, что были у нас! Будем благодарны за отзыв в 2ГИС — это минута.</div>
+        <div class="m u">Всё супер, оставила ★★★★★</div>
+        <div class="m">Катя, пора на коррекцию? У Марии есть окно в четверг, 18:00.</div>
+      </div></div></div>
+      <div class="cap"><b>Напоминание, отзыв, возврат</b><span>Меньше неявок, больше отзывов, клиенты возвращаются вовремя.</span></div></div>
   </div>
 </div></section>
 
-<section><div class="wrap">
-  <span class="eyebrow">Отчёт владельцу</span>
-  <h2>Каждый месяц вы видите, скольких клиентов бот&nbsp;сохранил</h2>
-  <p class="sub">Так выглядит ежемесячный отчёт. Цифры ниже — пример для демо-студии «Лаванда», а не результаты реального салона: в вашем отчёте будут ваши данные.</p>
-  <div class="rep">
-    <div class="rep-h"><div><b>Nail Studio «Лаванда» · октябрь</b><br><small>3 мастера · около 300 визитов в месяц</small></div><span class="rep-tag">Пример отчёта</span></div>
+<section style="padding-top:40px"><div class="wrap">
+  <div class="head-c"><span class="eyebrow rv">Отчёт владельцу</span>
+  <h2 class="rv d1">Каждый месяц вы видите, скольких клиентов <em>бот сохранил.</em></h2>
+  <p class="sub rv d2">Так выглядит ежемесячный отчёт. Цифры ниже — пример для демо-студии «Лаванда», а не результаты реального салона: в вашем отчёте будут ваши данные.</p></div>
+  <div class="rep rv">
+    <div class="rep-h"><div><b>Nail Studio «Лаванда» · октябрь</b><small>3 мастера · около 300 визитов в месяц</small></div><span class="tag2">Пример отчёта</span></div>
     <div class="rep-g">
-      <div class="rep-i"><span class="k">Ответ</span><div class="v">47</div><p>сообщений вечером, ночью и в выходные получили ответ за минуту — 29 из них закончились заявкой</p></div>
-      <div class="rep-i"><span class="k">Напоминание</span><div class="v">6</div><p>клиентов заранее отменили или перенесли визит — окна успели занять другие</p></div>
-      <div class="rep-i"><span class="k">Отзывы</span><div class="v">9</div><p>новых отзывов в 2ГИС и на Картах, и 2 недовольные гостьи, с которыми владелец успел поговорить</p></div>
-      <div class="rep-i"><span class="k">Возврат</span><div class="v">12</div><p>постоянных клиенток записались на коррекцию после напоминания</p></div>
+      <div class="rep-i"><span class="k">Ответ</span><div class="v" data-n="47">47</div><p>сообщений вечером, ночью и в выходные получили ответ за минуту — 29 из них закончились заявкой</p></div>
+      <div class="rep-i"><span class="k">Напоминание</span><div class="v" data-n="6">6</div><p>клиентов заранее отменили или перенесли визит — окна успели занять другие</p></div>
+      <div class="rep-i"><span class="k">Отзывы</span><div class="v" data-n="9">9</div><p>новых отзывов в 2ГИС и на Картах, и 2 недовольные гостьи, с которыми владелец успел поговорить</p></div>
+      <div class="rep-i"><span class="k">Возврат</span><div class="v" data-n="12">12</div><p>постоянных клиенток записались на коррекцию после напоминания</p></div>
     </div>
     <p class="rep-note">Пример рассчитан для иллюстрации. Реальные цифры зависят от числа обращений в вашем салоне — первый отчёт вы получите по итогам 14 бесплатных дней.</p>
   </div>
 </div></section>
 
-<section><div class="wrap">
-  <span class="eyebrow">Запуск</span>
-  <h2>От вас — 15 минут. Остальное делаем&nbsp;мы</h2>
-  <p class="sub">Без установки программ, обучения персонала и технических вопросов.</p>
-  <div class="steps">
-    <div class="st"><span class="n">Шаг 1</span><h3>Короткий созвон</h3><p>Присылаете прайс, мастеров, график и логотип — можно просто фото прайса.</p></div>
-    <div class="st"><span class="n">Шаг 2 · 2–3 дня</span><h3>Настраиваем бота</h3><p>Название, аватар, ответы и правила записи — под ваш салон.</p></div>
-    <div class="st"><span class="n">Шаг 3</span><h3>Ставим ссылку</h3><p>Там, где вам уже пишут: VK, 2ГИС, Яндекс Карты, автоответ WhatsApp, сайт, QR-код на ресепшен.</p></div>
-    <div class="st"><span class="n">Шаг 4 · 14 дней</span><h3>Тестируете бесплатно</h3><p>В конце — отчёт: сколько обращений и записей обработал бот и сколько из них ночью и в выходные.</p></div>
+<section style="padding-top:20px"><div class="wrap">
+  <div class="head-c"><span class="eyebrow rv">Запуск</span>
+  <h2 class="rv d1">От вас — 15 минут. <em>Остальное делаем мы.</em></h2>
+  <p class="sub rv d2">Без установки программ, обучения персонала и технических вопросов.</p></div>
+  <div class="launch">
+    <div class="lc rv"><span class="n">Шаг 1</span><h3>Короткий созвон</h3><p>Присылаете прайс, мастеров, график и логотип — можно просто фото прайса.</p></div>
+    <div class="lc rv d1"><span class="n">Шаг 2 · 2–3 дня</span><h3>Настраиваем бота</h3><p>Название, аватар, ответы и правила записи — под ваш салон.</p></div>
+    <div class="lc rv d2"><span class="n">Шаг 3</span><h3>Ставим ссылку</h3><p>Там, где вам уже пишут: VK, 2ГИС, Яндекс Карты, автоответ WhatsApp, сайт, QR-код на ресепшен.</p></div>
+    <div class="lc rv d3"><span class="n">Шаг 4 · 14 дней</span><h3>Тестируете бесплатно</h3><p>В конце — отчёт: сколько обращений и записей обработал бот и сколько из них ночью и в выходные.</p></div>
   </div>
 </div></section>
 
-<section class="alt"><div class="wrap">
-  <span class="eyebrow">Сравнение</span>
-  <h2>Работает вместе с YCLIENTS и DIKIDI</h2>
-  <p class="sub">Онлайн-запись удобна тем, кто сам выбирает время. Запись24 отвечает тем, кто сначала пишет вопрос, — и доводит их до записи.</p>
-  <table class="cmp">
+<section style="padding-top:20px"><div class="wrap">
+  <div class="head-c"><span class="eyebrow rv">Сравнение</span>
+  <h2 class="rv d1">Работает вместе с <em>YCLIENTS и DIKIDI.</em></h2>
+  <p class="sub rv d2">Онлайн-запись удобна тем, кто сам выбирает время. Запись24 отвечает тем, кто сначала пишет вопрос, — и доводит их до записи.</p></div>
+  <table class="cmp rv">
     <thead><tr><th>Ситуация</th><th>Виджет записи или кнопочный бот</th><th>Запись24</th></tr></thead>
     <tbody>
       <tr><td>«А можно в субботу к Марии после трёх?»</td><td>Клиент сам ищет по кнопкам</td><td>Отвечает и записывает</td></tr>
@@ -413,50 +316,47 @@ footer a:hover{color:var(--ink)}
   </table>
 </div></section>
 
-<section id="price"><div class="wrap">
-  <div class="ptop">
-    <div><span class="eyebrow">Тарифы</span><h2>Понятная цена без&nbsp;сюрпризов</h2>
-      <p class="sub">На 15-й день — стартовый платёж: настройка и первый месяц. Дальше платите помесячно или заранее со скидкой.</p></div>
-    <div class="seg" role="group" aria-label="Период оплаты">
-      <button type="button" data-p="1" aria-pressed="true">Месяц</button>
-      <button type="button" data-p="6" aria-pressed="false"><span class="l6">6 месяцев</span> <em>−10%</em></button>
-      <button type="button" data-p="12" aria-pressed="false">Год <em>−20%</em></button>
-    </div>
-  </div>
+<section id="price" style="padding-top:40px"><div class="wrap">
+  <div class="head-c"><span class="eyebrow rv">Тарифы</span>
+  <h2 class="rv d1">Понятная цена <em>без сюрпризов.</em></h2>
+  <p class="sub rv d2">На 15-й день — стартовый платёж: настройка и первый месяц. Дальше платите помесячно или заранее со скидкой.</p>
+  <div class="seg rv d2" role="group" aria-label="Период оплаты">
+    <button type="button" data-p="1" aria-pressed="true">Месяц</button>
+    <button type="button" data-p="6" aria-pressed="false">6 месяцев <em>−10%</em></button>
+    <button type="button" data-p="12" aria-pressed="false">Год <em>−20%</em></button>
+  </div></div>
   <div class="plans">
-    <article class="plan" data-m="990">
+    <article class="plan rv" data-m="990">
       <h3>Частный мастер</h3><p class="for">Для мастера, который работает сам</p>
       <div class="amt"><span class="v">990 ₽</span><span class="u">/ мес</span><s></s></div><p class="bill">оплата каждый месяц</p>
       <p class="startp">Старт: <b>2 990 ₽</b> на 15-й день — настройка и первый месяц</p>
       <ul><li>1 мастер</li><li>Ответы на вопросы 24/7</li><li>Запись клиентов</li><li>Заявки вам в Telegram</li><li>Правки прайса и графика — 2 раза в месяц</li></ul>
-      <a class="btn btn-s" href="anketa.html?t=master">Подключить бесплатно</a>
+      <a class="btn o" href="anketa.html?t=master">Подключить бесплатно</a>
     </article>
-    <article class="plan hit" data-m="1990">
-      <span class="badge">Выбирают чаще</span>
+    <article class="plan hit rv d1" data-m="1990">
+      <span class="badge">★ Выбирают чаще</span>
       <h3>Студия</h3><p class="for">Для салона или студии до 6 мастеров</p>
       <div class="amt"><span class="v">1 990 ₽</span><span class="u">/ мес</span><s></s></div><p class="bill">оплата каждый месяц</p>
       <p class="startp">Старт: <b>4 990 ₽</b> на 15-й день — настройка и первый месяц</p>
       <ul><li>До 6 мастеров</li><li>Всё из «Частного мастера»</li><li>Напоминание за день до визита</li><li>Просьба об отзыве после визита</li><li>Заявки в Telegram и Google-таблицу</li><li>Отчёт за месяц</li><li>Правки без ограничений</li></ul>
-      <a class="btn btn-p" href="anketa.html?t=studio">Подключить бесплатно</a>
+      <a class="btn" href="anketa.html?t=studio">Подключить бесплатно</a>
     </article>
-    <article class="plan" data-m="4990">
+    <article class="plan rv d2" data-m="4990">
       <h3>Сеть</h3><p class="for">Для 2–3 салонов и больше</p>
       <div class="amt"><span class="v">4 990 ₽</span><span class="u">/ мес</span><s></s></div><p class="bill">оплата каждый месяц</p>
       <p class="startp">Старт: <b>9 900 ₽</b> на 15-й день — до 3 филиалов, каждый следующий +1 490 ₽/мес</p>
       <ul><li>Один бот на все филиалы</li><li>Заявка уходит администратору нужного филиала</li><li>Всё из «Студии»</li><li>Рассылки: акции и свободные окна</li><li>Бот в сообщениях VK-сообщества</li><li>Отчёт по филиалам, приоритетная поддержка</li></ul>
-      <a class="btn btn-s" href="anketa.html?t=network">Подключить бесплатно</a>
+      <a class="btn o" href="anketa.html?t=network">Подключить бесплатно</a>
     </article>
   </div>
   <div class="pfoot">
-    <div class="pbox trial"><h3>Первые 14 дней — бесплатно на любом тарифе</h3><p>Не подошло — просто отключаем, вы ничего не платите. При отказе от предоплаченного периода вернём деньги за неиспользованные полные месяцы.</p></div>
-    <div class="pbox"><h3>Способы оплаты</h3><p>Чек самозанятого по каждому платежу.</p>
-      <ul class="pay"><li>СБП по номеру телефона</li><li>Перевод на карту</li><li>По счёту для ИП и ООО</li></ul></div>
+    <div class="pbox trial rv"><h3>Первые 14 дней — бесплатно на любом тарифе</h3><p>Не подошло — просто отключаем, вы ничего не платите. При отказе от предоплаченного периода вернём деньги за неиспользованные полные месяцы.</p></div>
+    <div class="pbox rv d1"><h3>Способы оплаты</h3><p>Чек самозанятого по каждому платежу.</p><ul><li>СБП по номеру телефона</li><li>Перевод на карту</li><li>По счёту для ИП и ООО</li></ul></div>
   </div>
 </div></section>
 
-<section class="alt faq" id="faq"><div class="wrap split">
-  <div><span class="eyebrow">Вопросы</span><h2>Всё, о чём обычно переживают владельцы салонов</h2></div>
-  <div>
+<section class="faq" id="faq"><div class="wrap">
+  <div class="head-c"><h2 class="rv">Всё, о чём обычно <em>переживают владельцы салонов.</em></h2></div>
 <details><summary>Бот приведёт мне новых клиентов?</summary><p>Честно — нет, новых клиентов приводит ваша реклама, 2ГИС и сарафан. Бот делает так, чтобы те, кто уже вам пишет, не уходили без ответа: отвечает мгновенно и доводит до записи. А сбор отзывов после визита помогает поднимать рейтинг.</p></details>
   <details><summary>У нас уже есть администратор</summary><p>Бот его не заменяет, а прикрывает: когда администратор занят, на звонке, на обеде или салон закрыт. И снимает с него однотипные вопросы — администратор получает уже готовую заявку.</p></details>
   <details><summary>У нас YCLIENTS / DIKIDI — зачем ещё бот?</summary><p>YCLIENTS — это журнал и страница записи: он работает, когда клиент сам нашёл ссылку и сам выбрал время. Но многие не ищут ссылку, а пишут в ВК, WhatsApp или Telegram: «есть окошко в субботу?», «сколько стоит?». Бот отвечает на такие сообщения за секунды, в любое время, и доводит до записи — администратор получает готовую заявку и ставит её в журнал. Бот ничего не заменяет: YCLIENTS остаётся, а сообщения в чатах больше не ждут ответа до утра.</p></details>
@@ -471,14 +371,15 @@ footer a:hover{color:var(--ink)}
   <details><summary>Можно ли поменять цены, мастеров или график?</summary><p>Да, просто напишите нам в Telegram — обновим в течение дня. На тарифах «Студия» и «Сеть» правки без ограничений.</p></details>
   <details><summary>Сколько я на самом деле получу?</summary><p>Зависит от того, сколько вам пишут. Поэтому мы и даём 14 дней бесплатно: в конце вы получите отчёт — сколько обращений бот обработал, сколько записей собрал и сколько из них пришло ночью и в выходные, когда вы бы не ответили. Решение принимаете по цифрам, а не по обещаниям.</p></details>
   <details><summary>Как оплатить?</summary><p>По СБП, переводом на карту или по счёту для ИП и ООО — по каждому платежу выдаём чек самозанятого. Можно платить помесячно или заранее: за 6 месяцев со скидкой 10%, за год — 20%. Без договора на год.</p></details>
-  </div>
 </div></section>
 
-<section><div class="wrap">
-  <div class="final">
-    <div><h2>Попробуйте сами — за&nbsp;две минуты</h2><p>Напишите демо-боту как клиент: спросите цены, запишитесь на маникюр — и посмотрите, какая заявка приходит администратору.</p><p class="ask">Есть вопросы? Напишите нам:</p><div class="askb"><a class="btn btn-s" href="https://t.me/zapis_24" target="_blank" rel="noopener">Написать в Telegram</a><a class="btn btn-s" href="https://max.ru/u/f9LHodD0cOIp5Ru9NJiNzQP0tw2_9ayb3dk1-PsI4vvANR4-Mj2PfpSgaYM" target="_blank" rel="noopener">Написать в MAX</a></div></div>
-    <a class="btn btn-p" href="https://t.me/zapis24demo_bot" target="_blank" rel="noopener">Открыть демо-бота</a>
-  </div>
+<section class="final"><div class="blob" style="width:340px;height:340px;background:#ff8fb3;top:-90px;left:-70px;opacity:.5"></div><div class="blob" style="width:300px;height:300px;background:#ffcf8a;bottom:-90px;right:-50px;opacity:.45;animation-delay:-6s"></div>
+  <div class="wrap">
+  <h2 class="rv">Попробуйте сами — <em>за две минуты.</em></h2>
+  <p class="sub rv d1">Напишите демо-боту как клиент: спросите цены, запишитесь на маникюр — и посмотрите, какая заявка приходит администратору.</p>
+  <div class="cta rv d2"><a class="btn" href="https://t.me/zapis24demo_bot" target="_blank" rel="noopener">Открыть демо-бота →</a></div>
+  <p class="ask rv d2">Есть вопросы? Напишите нам:</p>
+  <div class="cta rv d3" style="margin-top:14px"><a class="btn o" href="https://t.me/zapis_24" target="_blank" rel="noopener">Написать в Telegram</a><a class="btn o" href="https://max.ru/u/f9LHodD0cOIp5Ru9NJiNzQP0tw2_9ayb3dk1-PsI4vvANR4-Mj2PfpSgaYM" target="_blank" rel="noopener">Написать в MAX</a></div>
 </div></section>
 </main>
 
@@ -487,24 +388,79 @@ footer a:hover{color:var(--ink)}
   <nav><a href="https://t.me/zapis_24" target="_blank" rel="noopener">Telegram: @zapis_24</a><a href="https://max.ru/u/f9LHodD0cOIp5Ru9NJiNzQP0tw2_9ayb3dk1-PsI4vvANR4-Mj2PfpSgaYM" target="_blank" rel="noopener">Написать в MAX</a><a href="https://t.me/zapis24demo_bot">Демо-бот</a><a href="anketa.html">Анкета для подключения</a><a href="oferta.html">Договор-оферта</a><a href="privacy.html">Политика конфиденциальности</a></nav>
 </div></footer>
 
-<div class="mcta" id="mcta"><a class="btn btn-p" href="https://t.me/zapis24demo_bot" target="_blank" rel="noopener">Попробовать бесплатно</a></div>
+<div class="mcta" id="mcta"><a class="btn" href="https://t.me/zapis24demo_bot" target="_blank" rel="noopener">Попробовать бесплатно</a></div>
 
 <script>
 (function(){
+  /* ---------- reveal on scroll ---------- */
+  var rvs=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    rvs.forEach(function(el){io.observe(el)});
+  } else rvs.forEach(function(el){el.classList.add('in')});
+
+  /* ---------- count-up numbers ---------- */
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return; cio.unobserve(e.target);
+    var el=e.target,to=+el.dataset.n,t0=null;
+    function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/1100,1),k=1-Math.pow(1-p,3);el.textContent=Math.round(to*k);if(p<1)requestAnimationFrame(step)}
+    el.textContent='0';requestAnimationFrame(step);
+  })},{threshold:.6});
+  document.querySelectorAll('.rep-i .v').forEach(function(el){cio.observe(el)});
+
+  /* ---------- header + mobile CTA ---------- */
+  var hd=document.getElementById('hd'),mc=document.getElementById('mcta');
+  addEventListener('scroll',function(){var y=scrollY;hd.classList.toggle('s',y>20);mc.classList.toggle('on',y>innerHeight*.9)},{passive:true});
+
+  /* ---------- pricing toggle ---------- */
   var fmt=function(n){return n.toLocaleString('ru-RU').replace(/,/g,' ')+' ₽'};
   var disc={1:0,6:.10,12:.20};
   function setP(p){
     document.querySelectorAll('.seg button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.p==p)});
     document.querySelectorAll('.plan').forEach(function(el){
-      var m=+el.dataset.m, per=Math.round(m*(1-disc[p])/10)*10;
+      var m=+el.dataset.m,per=Math.round(m*(1-disc[p])/10)*10;
       el.querySelector('.v').textContent=fmt(per);
       el.querySelector('s').textContent=p==1?'':fmt(m);
       el.querySelector('.bill').textContent=p==1?'оплата каждый месяц':fmt(per*p)+' за '+(p==6?'6 месяцев':'год')+' · экономия '+fmt((m-per)*p);
     });
   }
   document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){setP(b.dataset.p)})});
-  var hd=document.getElementById('hd'), mc=document.getElementById('mcta');
-  addEventListener('scroll',function(){var y=scrollY;hd.classList.toggle('s',y>8);mc.classList.toggle('on',y>innerHeight*.9)},{passive:true});
+
+  /* ---------- interactive demo phone (scripted, not real AI) ---------- */
+  var chat=document.getElementById('chat'),chips=document.getElementById('chips');
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var SCEN=[
+    {q:'Сколько стоит маникюр с покрытием?',a:'Маникюр с гель-лаком — 2 200 ₽, с укреплением — 2 600 ₽. Для новых гостей скидка 15%. Подобрать время?'},
+    {q:'Есть окно в субботу после трёх?',a:'В субботу в 15:00 у Марии есть окно. Записать вас? Подскажите, пожалуйста, имя и телефон.'},
+    {q:'Где вы находитесь?',a:'Мы на ул. Карла Маркса, 25. Парковка во дворе бесплатная. Работаем ежедневно с 10:00 до 20:00.'},
+    {q:'Можно ли с ребёнком?',a:'Конечно! Просто предупредите заранее, чтобы мы подобрали удобное время. Детям у нас всегда рады.'}
+  ];
+  var used={},busy=false;
+  function add(cls,html){var d=document.createElement('div');d.className='m '+(cls||'');d.innerHTML=html;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}
+  function typing(){return add('','<span class="typing"><i></i><i></i><i></i></span>')}
+  function wait(ms){return new Promise(function(r){setTimeout(r,reduce?0:ms)})}
+  function renderChips(){
+    chips.innerHTML='';
+    SCEN.forEach(function(s,i){
+      if(used[i])return;
+      var b=document.createElement('button');b.type='button';b.className='chip';b.textContent=s.q;
+      b.onclick=function(){ask(i)};chips.appendChild(b);
+    });
+    if(Object.keys(used).length){
+      var a=document.createElement('a');a.className='chip';a.style.background='var(--wine)';a.style.color='#fff';a.href="https://t.me/zapis24demo_bot";a.target='_blank';a.rel='noopener';a.textContent='Написать настоящему боту →';chips.appendChild(a);
+    }
+  }
+  async function ask(i){
+    if(busy)return;busy=true;used[i]=1;chips.querySelectorAll('.chip').forEach(function(c){c.disabled=true});
+    add('u',SCEN[i].q);await wait(500);var t=typing();await wait(1100);t.remove();add('',SCEN[i].a);
+    if(i===1){await wait(700);var t2=typing();await wait(900);t2.remove();
+      add('card','<div class="t">Новая заявка · администратору</div><dl><dt>Услуга</dt><dd>Маникюр + гель-лак</dd><dt>Мастер</dt><dd>Мария</dd><dt>Время</dt><dd>Суббота, 15:00</dd></dl>')}
+    busy=false;renderChips();
+  }
+  (async function intro(){
+    await wait(900);add('u','Здравствуйте! Вы работаете по вечерам?');await wait(500);var t=typing();await wait(1100);t.remove();
+    add('','Добрый вечер! Да, я отвечаю круглосуточно. Чем помочь — цены, запись, адрес?');renderChips();
+  })();
 })();
 </script>
 </body>
