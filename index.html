@@ -12,9 +12,10 @@
 <style>
 :root{--cream:#fbf5ef;--paper:#fffdfa;--ink:#2a1722;--ink2:#5a4650;--mut:#6f5f68;--line:#eadfd6;
 --wine:#8a1f4d;--wine-d:#6a1439;--peach:#ffd9c2;--rose:#ffc7d6;--sage:#cfe5d6;--sage-d:#2f6b4f;--lilac:#e5d9f7;--sun:#ffe9a8;
---serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
+--hd:68px;--serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+:target,[id]{scroll-margin-top:var(--hd)}
 body{font-family:var(--sans);color:var(--ink);background:var(--cream);font-size:17px;line-height:1.55;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:3px solid var(--wine);outline-offset:3px;border-radius:8px}
