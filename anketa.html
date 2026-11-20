@@ -49,102 +49,102 @@ button:hover{background:var(--wine-d)}button:disabled{opacity:.6;cursor:wait}
 .progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:12px;display:none}
 .progress i{display:block;height:100%;width:0;background:var(--wine);transition:width .2s}
 .hidden{display:none}
-</style>
+h1,h2,h3{text-wrap:balance}p,li,.lead,.sub{text-wrap:pretty}</style>
 </head>
 <body>
 <div class="wrap">
-<div class="top"><a class="logo" href="/">Запись<b>24</b></a><a href="/" style="font-size:15px">← на главную</a></div>
+<div class="top"><a class="logo" href="/">Запись<b>24</b></a><a href="/" style="font-size:15px">← на главную</a></div>
 
 <div id="formbox">
 <h1>Анкета салона</h1>
-<p class="intro">По этим данным мы настроим бота под ваш салон. Займёт 10–15 минут. Если чего-то нет под рукой — пропустите, уточним в переписке. Поля со звёздочкой обязательны. Удобнее голосом или в переписке — напишите в <a href="https://t.me/zapis_24" target="_blank">Telegram @zapis_24</a> или <a href="https://max.ru/u/f9LHodD0cOIp5Ru9NJiNzQP0tw2_9ayb3dk1-PsI4vvANR4-Mj2PfpSgaYM" target="_blank">MAX</a>.</p>
+<p class="intro">По этим данным мы настроим бота под ваш салон. Займёт 10–15 минут. Если чего-то нет под рукой — пропустите, уточним в переписке. Поля со звёздочкой обязательны. Удобнее голосом или в переписке — напишите в <a href="https://t.me/zapis_24" target="_blank">Telegram @zapis_24</a> или <a href="https://max.ru/u/f9LHodD0cOIp5Ru9NJiNzQP0tw2_9ayb3dk1-PsI4vvANR4-Mj2PfpSgaYM" target="_blank">MAX</a>.</p>
 
 <form id="f" novalidate>
 <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-<fieldset><legend><span>01</span>О салоне</legend>
-<div class="f"><label class="req" for="salon">Название салона или имя мастера</label><div class="h">Так будет называться бот, например: Nail Studio «Лаванда»</div><input type="text" id="salon" name="salon" required maxlength="200"></div>
+<fieldset><legend><span>01</span>О салоне</legend>
+<div class="f"><label class="req" for="salon">Название салона или имя мастера</label><div class="h">Так будет называться бот, например: Nail Studio «Лаванда»</div><input type="text" id="salon" name="salon" required maxlength="200"></div>
 <div class="f"><label class="req" for="city">Город</label><input type="text" id="city" name="city" required maxlength="100"></div>
 <div class="f"><div class="l req">Формат</div><div class="opts">
 <label><input type="radio" name="format" value="Частный мастер" required> Частный мастер</label>
 <label><input type="radio" name="format" value="Студия / салон"> Студия / салон</label>
-<label><input type="radio" name="format" value="Сеть из нескольких филиалов"> Сеть из нескольких филиалов</label></div></div>
-<div class="f"><label class="req" for="address">Адрес и как найти вход</label><div class="h">Например: ул. Карла Маркса, 25, 2 этаж, вход со двора</div><input type="text" id="address" name="address" required maxlength="500"></div>
-<div class="f hidden" id="branchesBox"><label for="branches">Филиалы</label><div class="h">Каждый филиал с новой строки: адрес — телефон — Telegram администратора</div><textarea id="branches" name="branches" maxlength="3000"></textarea></div>
+<label><input type="radio" name="format" value="Сеть из нескольких филиалов"> Сеть из нескольких филиалов</label></div></div>
+<div class="f"><label class="req" for="address">Адрес и как найти вход</label><div class="h">Например: ул. Карла Маркса, 25, 2 этаж, вход со двора</div><input type="text" id="address" name="address" required maxlength="500"></div>
+<div class="f hidden" id="branchesBox"><label for="branches">Филиалы</label><div class="h">Каждый филиал с новой строки: адрес — телефон — Telegram администратора</div><textarea id="branches" name="branches" maxlength="3000"></textarea></div>
 <div class="f"><label class="req" for="hours">График работы</label><div class="h">Например: пн–пт 9:00–21:00, сб–вс 10:00–18:00</div><input type="text" id="hours" name="hours" required maxlength="300"></div>
-<div class="f"><label class="req" for="phones">Телефоны для клиентов</label><div class="h">Каждый номер с новой строки. Можно указать, чей: администратор, мастер</div><textarea id="phones" name="phones" required maxlength="1000" style="min-height:70px"></textarea></div>
+<div class="f"><label class="req" for="phones">Телефоны для клиентов</label><div class="h">Каждый номер с новой строки. Можно указать, чей: администратор, мастер</div><textarea id="phones" name="phones" required maxlength="1000" style="min-height:70px"></textarea></div>
 </fieldset>
 
-<fieldset><legend><span>02</span>Услуги и мастера</legend>
-<div class="f"><label for="price">Прайс: услуги, цены, длительность</label><div class="h">Каждая услуга с новой строки: услуга — цена — длительность.
-Например: Маникюр с покрытием — 1 800 ₽ — 1,5 ч
-Можно вместо этого прикрепить фото/файл прайса ниже или дать ссылку на страницу с ценами.</div><textarea id="price" name="price" maxlength="8000" style="min-height:140px"></textarea></div>
-<div class="f"><label for="price_files">Фото или файл прайса</label><input type="file" id="price_files" name="price_files" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"><div class="files">До 10 файлов, всего до 25 МБ</div></div>
-<div class="f"><label class="req" for="masters">Мастера: имя, что делает, в какие дни работает</label><div class="h">Каждый мастер с новой строки. Например:
-Анна — маникюр, педикюр — пн–пт
-Мария — брови, ресницы — сб–вс</div><textarea id="masters" name="masters" required maxlength="3000"></textarea></div>
-<div class="f"><label for="promo">Акции и скидки, которые бот может предлагать</label><div class="h">Например: −15% на первый визит</div><textarea id="promo" name="promo" maxlength="2000" style="min-height:70px"></textarea></div>
-<div class="f"><label for="rules">Важные правила</label><div class="h">Предоплата, опоздания, отмена записи, парковка, можно ли с детьми и т. п.</div><textarea id="rules" name="rules" maxlength="3000"></textarea></div>
-<div class="f"><label for="never">Чего бот НЕ должен обещать или говорить</label><textarea id="never" name="never" maxlength="2000" style="min-height:70px"></textarea></div>
+<fieldset><legend><span>02</span>Услуги и мастера</legend>
+<div class="f"><label for="price">Прайс: услуги, цены, длительность</label><div class="h">Каждая услуга с новой строки: услуга — цена — длительность.
+Например: Маникюр с покрытием — 1 800 ₽ — 1,5 ч
+Можно вместо этого прикрепить фото/файл прайса ниже или дать ссылку на страницу с ценами.</div><textarea id="price" name="price" maxlength="8000" style="min-height:140px"></textarea></div>
+<div class="f"><label for="price_files">Фото или файл прайса</label><input type="file" id="price_files" name="price_files" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"><div class="files">До 10 файлов, всего до 25 МБ</div></div>
+<div class="f"><label class="req" for="masters">Мастера: имя, что делает, в какие дни работает</label><div class="h">Каждый мастер с новой строки. Например:
+Анна — маникюр, педикюр — пн–пт
+Мария — брови, ресницы — сб–вс</div><textarea id="masters" name="masters" required maxlength="3000"></textarea></div>
+<div class="f"><label for="promo">Акции и скидки, которые бот может предлагать</label><div class="h">Например: −15% на первый визит</div><textarea id="promo" name="promo" maxlength="2000" style="min-height:70px"></textarea></div>
+<div class="f"><label for="rules">Важные правила</label><div class="h">Предоплата, опоздания, отмена записи, парковка, можно ли с детьми и т. п.</div><textarea id="rules" name="rules" maxlength="3000"></textarea></div>
+<div class="f"><label for="never">Чего бот НЕ должен обещать или говорить</label><textarea id="never" name="never" maxlength="2000" style="min-height:70px"></textarea></div>
 </fieldset>
 
-<fieldset><legend><span>03</span>Заявки и ссылки</legend>
-<div class="f"><label class="req" for="admins">Кому присылать заявки</label><div class="h">Telegram-ник администратора или владельца, каждый с новой строки. Например: @anna_lavanda</div><textarea id="admins" name="admins" required maxlength="500" style="min-height:70px"></textarea></div>
-<div class="f"><div class="l req">Как к вам сейчас записываются клиенты</div><div class="h">Можно выбрать несколько</div><div class="opts">
+<fieldset><legend><span>03</span>Заявки и ссылки</legend>
+<div class="f"><label class="req" for="admins">Кому присылать заявки</label><div class="h">Telegram-ник администратора или владельца, каждый с новой строки. Например: @anna_lavanda</div><textarea id="admins" name="admins" required maxlength="500" style="min-height:70px"></textarea></div>
+<div class="f"><div class="l req">Как к вам сейчас записываются клиенты</div><div class="h">Можно выбрать несколько</div><div class="opts">
 <label><input type="checkbox" name="booking_now" value="YCLIENTS"> YCLIENTS</label>
 <label><input type="checkbox" name="booking_now" value="DIKIDI"> DIKIDI</label>
 <label><input type="checkbox" name="booking_now" value="Другая онлайн-запись"> Другая онлайн-запись</label>
-<label><input type="checkbox" name="booking_now" value="Пишут в мессенджеры / VK"> Пишут в Telegram / WhatsApp / MAX / VK</label>
-<label><input type="checkbox" name="booking_now" value="Звонят по телефону"> Звонят по телефону</label></div></div>
-<div class="f"><label for="booking_link">Ссылка на вашу онлайн-запись (если есть)</label><div class="h">Страница, где клиент сам выбирает услугу, мастера и время — например, в YCLIENTS или DIKIDI</div><input type="text" id="booking_link" name="booking_link" maxlength="500"></div>
-<div class="f"><label class="req" for="links">Где вам пишут клиенты — ссылки</label><div class="h">Каждая ссылка с новой строки: VK, 2ГИС, Яндекс Карты, сайт и т. д. Мы подготовим для этих мест ссылку на бота и тексты, а вставите их вы.</div><textarea id="links" name="links" required maxlength="2000"></textarea></div>
-<div class="f"><label for="reviews">Где оставлять отзывы — ссылки</label><div class="h">2ГИС, Яндекс Карты и т. д. После визита бот будет просить клиента оставить отзыв.</div><textarea id="reviews" name="reviews" maxlength="1500" style="min-height:70px"></textarea></div>
-<div class="f"><div class="l req">Как бот общается с клиентами</div><div class="opts">
-<label><input type="radio" name="tone" value="На «вы», тепло и вежливо" required> На «вы», тепло и вежливо</label>
-<label><input type="radio" name="tone" value="На «вы», коротко и по делу"> На «вы», коротко и по делу</label>
-<label><input type="radio" name="tone" value="На «вы», легко, с эмодзи и юмором"> На «вы», легко, с эмодзи и юмором</label>
-<label><input type="radio" name="tone" value="На «ты», по-дружески"> На «ты», по-дружески</label></div></div>
+<label><input type="checkbox" name="booking_now" value="Пишут в мессенджеры / VK"> Пишут в Telegram / WhatsApp / MAX / VK</label>
+<label><input type="checkbox" name="booking_now" value="Звонят по телефону"> Звонят по телефону</label></div></div>
+<div class="f"><label for="booking_link">Ссылка на вашу онлайн-запись (если есть)</label><div class="h">Страница, где клиент сам выбирает услугу, мастера и время — например, в YCLIENTS или DIKIDI</div><input type="text" id="booking_link" name="booking_link" maxlength="500"></div>
+<div class="f"><label class="req" for="links">Где вам пишут клиенты — ссылки</label><div class="h">Каждая ссылка с новой строки: VK, 2ГИС, Яндекс Карты, сайт и т. д. Мы подготовим для этих мест ссылку на бота и тексты, а вставите их вы.</div><textarea id="links" name="links" required maxlength="2000"></textarea></div>
+<div class="f"><label for="reviews">Где оставлять отзывы — ссылки</label><div class="h">2ГИС, Яндекс Карты и т. д. После визита бот будет просить клиента оставить отзыв.</div><textarea id="reviews" name="reviews" maxlength="1500" style="min-height:70px"></textarea></div>
+<div class="f"><div class="l req">Как бот общается с клиентами</div><div class="opts">
+<label><input type="radio" name="tone" value="На «вы», тепло и вежливо" required> На «вы», тепло и вежливо</label>
+<label><input type="radio" name="tone" value="На «вы», коротко и по делу"> На «вы», коротко и по делу</label>
+<label><input type="radio" name="tone" value="На «вы», легко, с эмодзи и юмором"> На «вы», легко, с эмодзи и юмором</label>
+<label><input type="radio" name="tone" value="На «ты», по-дружески"> На «ты», по-дружески</label></div></div>
 </fieldset>
 
 <fieldset><legend><span>04</span>Оформление</legend>
-<div class="f"><div class="l req">Логотип для бота</div><div class="opts">
-<label><input type="radio" name="logo_choice" value="Есть, прикреплю" required> Есть — прикреплю ниже</label>
-<label><input type="radio" name="logo_choice" value="Нет — сделать для бота (бесплатно)"> Логотипа нет — сделайте для бота (бесплатно)</label>
-<label><input type="radio" name="logo_choice" value="Нет — сделать логотип для салона (платно)"> Логотипа нет — сделайте логотип для салона: для бота, соцсетей, визиток (платно, сообщим цену)</label></div></div>
+<div class="f"><div class="l req">Логотип для бота</div><div class="opts">
+<label><input type="radio" name="logo_choice" value="Есть, прикреплю" required> Есть — прикреплю ниже</label>
+<label><input type="radio" name="logo_choice" value="Нет — сделать для бота (бесплатно)"> Логотипа нет — сделайте для бота (бесплатно)</label>
+<label><input type="radio" name="logo_choice" value="Нет — сделать логотип для салона (платно)"> Логотипа нет — сделайте логотип для салона: для бота, соцсетей, визиток (платно, сообщим цену)</label></div></div>
 <div class="f" id="logoBox"><label for="logo">Логотип</label><input type="file" id="logo" name="logo" accept="image/*,.pdf,.svg"></div>
-<div class="f"><label for="photos">Фото салона или работ (по желанию)</label><input type="file" id="photos" name="photos" multiple accept="image/*"></div>
+<div class="f"><label for="photos">Фото салона или работ (по желанию)</label><input type="file" id="photos" name="photos" multiple accept="image/*"></div>
 </fieldset>
 
-<fieldset><legend><span>05</span>Тариф и оплата</legend>
-<div class="f"><div class="l req">Тариф</div><div class="h">Первые 14 дней бесплатно. Оплата — только если бот понравился.</div><div class="opts">
-<label><input type="radio" name="tariff" value="Частный мастер" required> Частный мастер — подключение 1 990 ₽ (первый месяц в подарок), далее 990 ₽/мес</label>
-<label><input type="radio" name="tariff" value="Студия"> Студия — подключение 3 990 ₽ (первый месяц в подарок), далее 1 990 ₽/мес</label>
-<label><input type="radio" name="tariff" value="Сеть"> Сеть — подключение 5 990 ₽ (первый месяц в подарок), далее 3 990 ₽/мес</label></div></div>
-<div class="f"><div class="l req">Как будете оплачивать</div><div class="opts">
-<label><input type="radio" name="payer" value="Физлицо" required> Как физлицо (СБП / на карту)</label>
-<label><input type="radio" name="payer" value="ИП"> ИП — по счёту</label>
-<label><input type="radio" name="payer" value="ООО"> ООО — по счёту</label></div></div>
+<fieldset><legend><span>05</span>Тариф и оплата</legend>
+<div class="f"><div class="l req">Тариф</div><div class="h">Первые 14 дней бесплатно. Оплата — только если бот понравился.</div><div class="opts">
+<label><input type="radio" name="tariff" value="Частный мастер" required> Частный мастер — подключение 1 990 ₽ (первый месяц в подарок), далее 990 ₽/мес</label>
+<label><input type="radio" name="tariff" value="Студия"> Студия — подключение 3 990 ₽ (первый месяц в подарок), далее 1 990 ₽/мес</label>
+<label><input type="radio" name="tariff" value="Сеть"> Сеть — подключение 5 990 ₽ (первый месяц в подарок), далее 3 990 ₽/мес</label></div></div>
+<div class="f"><div class="l req">Как будете оплачивать</div><div class="opts">
+<label><input type="radio" name="payer" value="Физлицо" required> Как физлицо (СБП / на карту)</label>
+<label><input type="radio" name="payer" value="ИП"> ИП — по счёту</label>
+<label><input type="radio" name="payer" value="ООО"> ООО — по счёту</label></div></div>
 <div id="reqBox" class="hidden">
-<div class="f"><label for="org">Название организации и ИНН</label><div class="h">Нужно для счёта и чека. Например: ИП Иванова Анна Сергеевна, ИНН 380800000000</div><input type="text" id="org" name="org" maxlength="300"></div>
+<div class="f"><label for="org">Название организации и ИНН</label><div class="h">Нужно для счёта и чека. Например: ИП Иванова Анна Сергеевна, ИНН 380800000000</div><input type="text" id="org" name="org" maxlength="300"></div>
 <div class="f"><label for="requisites">Реквизиты (если удобнее текстом)</label><div class="h">ОГРН/ОГРНИП, юр. адрес, банк, БИК, расчётный счёт</div><textarea id="requisites" name="requisites" maxlength="3000"></textarea></div>
-<div class="f"><label for="req_file">Или карточка организации файлом</label><input type="file" id="req_file" name="req_file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"></div>
+<div class="f"><label for="req_file">Или карточка организации файлом</label><input type="file" id="req_file" name="req_file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"></div>
 </div>
 </fieldset>
 
 <fieldset><legend><span>06</span>Контакты</legend>
 <div class="f"><label class="req" for="contact_name">Контактное лицо: имя</label><input type="text" id="contact_name" name="contact_name" required maxlength="150"></div>
-<div class="f"><label class="req" for="contact_phone">Телефон</label><input type="tel" id="contact_phone" name="contact_phone" required maxlength="40" placeholder="+7 900 000-00-00"></div>
+<div class="f"><label class="req" for="contact_phone">Телефон</label><input type="tel" id="contact_phone" name="contact_phone" required maxlength="40" placeholder="+7 900 000-00-00"></div>
 <div class="f"><div class="l req">Где удобнее держать связь</div><div class="opts">
 <label><input type="radio" name="channel" value="Telegram" required> Telegram</label>
 <label><input type="radio" name="channel" value="MAX"> MAX</label>
 <label><input type="radio" name="channel" value="VK"> VK</label>
 <label><input type="radio" name="channel" value="WhatsApp"> WhatsApp</label>
 <label><input type="radio" name="channel" value="Почта"> Электронная почта</label></div></div>
-<div class="f"><label class="req" for="contact_handle">Ваш ник, ссылка или почта для связи</label><input type="text" id="contact_handle" name="contact_handle" required maxlength="200"></div>
-<div class="f"><label for="comment">Комментарий или пожелания</label><textarea id="comment" name="comment" maxlength="3000" style="min-height:70px"></textarea></div>
+<div class="f"><label class="req" for="contact_handle">Ваш ник, ссылка или почта для связи</label><input type="text" id="contact_handle" name="contact_handle" required maxlength="200"></div>
+<div class="f"><label for="comment">Комментарий или пожелания</label><textarea id="comment" name="comment" maxlength="3000" style="min-height:70px"></textarea></div>
 </fieldset>
 
-<label class="consent"><input type="checkbox" id="consent" required> <span>Согласен(на) на обработку персональных данных по <a href="https://zapis24bot.ru/privacy.html" target="_blank">политике конфиденциальности</a> и с <a href="https://zapis24bot.ru/oferta.html" target="_blank">договором-офертой</a>.</span></label>
+<label class="consent"><input type="checkbox" id="consent" required> <span>Согласен(на) на обработку персональных данных по <a href="https://zapis24bot.ru/privacy.html" target="_blank">политике конфиденциальности</a> и с <a href="https://zapis24bot.ru/oferta.html" target="_blank">договором-офертой</a>.</span></label>
 <button type="submit" id="btn">Отправить анкету</button>
 <div class="progress" id="prog"><i></i></div>
 <div class="msg" id="msg"></div>
@@ -154,9 +154,9 @@ button:hover{background:var(--wine-d)}button:disabled{opacity:.6;cursor:wait}
 <div class="done" id="done">
 <h2>Спасибо!</h2>
 <p>Анкета получена. Номер заявки: <b id="cid"></b>.</p>
-<p>Мы настроим бота и напишем вам в течение рабочего дня. 14 дней — бесплатно.</p>
-<p>Вопросы — в <a href="https://t.me/zapis_24" target="_blank">Telegram @zapis_24</a> или <a href="https://max.ru/u/f9LHodD0cOIp5Ru9NJiNzQP0tw2_9ayb3dk1-PsI4vvANR4-Mj2PfpSgaYM" target="_blank">MAX</a>.</p>
-<p style="margin-top:24px"><a href="/">Вернуться на сайт</a></p>
+<p>Мы настроим бота и напишем вам в течение рабочего дня. 14 дней — бесплатно.</p>
+<p>Вопросы — в <a href="https://t.me/zapis_24" target="_blank">Telegram @zapis_24</a> или <a href="https://max.ru/u/f9LHodD0cOIp5Ru9NJiNzQP0tw2_9ayb3dk1-PsI4vvANR4-Mj2PfpSgaYM" target="_blank">MAX</a>.</p>
+<p style="margin-top:24px"><a href="/">Вернуться на сайт</a></p>
 </div>
 </div>
 <script>
