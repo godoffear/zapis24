@@ -38,6 +38,9 @@
 
   var open = bar.querySelector('.rp-open'), form = bar.querySelector('.rp-form'), msg = bar.querySelector('.rp-msg'),
       send = bar.querySelector('.rp-send');
+  function openForm() { if (form.style.display !== 'block' && form.style.display !== 'flex') open.click(); bar.scrollIntoView({behavior: 'smooth', block: 'center'}); var f = bar.querySelector('#rp-email'); if (f) setTimeout(function () { f.focus(); }, 300); }
+  document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('[data-rp-open]'); if (a) { e.preventDefault(); openForm(); } });
+  if (location.hash === '#report') setTimeout(openForm, 400);
   open.addEventListener('click', function () {
     var on = form.classList.toggle('on');
     open.setAttribute('aria-expanded', on ? 'true' : 'false');
