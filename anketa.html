@@ -57,7 +57,7 @@ h1,h2,h3{text-wrap:balance}p,li,.lead,.sub{text-wrap:pretty}</style>
 
 <div id="formbox">
 <h1>Анкета салона</h1>
-<p class="intro">По этим данным мы настроим бота под ваш салон. Займёт 10–15 минут. Если чего-то нет под рукой — пропустите, уточним в переписке. Поля со звёздочкой обязательны. Удобнее голосом или в переписке — напишите в <a href="https://t.me/zapis_24" target="_blank">Telegram @zapis_24</a> или <a href="https://max.ru/u/f9LHodD0cOIp5Ru9NJiNzQP0tw2_9ayb3dk1-PsI4vvANR4-Mj2PfpSgaYM" target="_blank">MAX</a>.</p>
+<p class="intro">По этим данным мы настроим бота под ваш салон. Займёт 10–15 минут. Если каких-то данных нет под рукой, пропустите поле: мы уточним их в переписке. Поля со звёздочкой обязательны. Удобнее голосом или в переписке — напишите в <a href="https://t.me/zapis_24" target="_blank">Telegram @zapis_24</a> или <a href="https://max.ru/u/f9LHodD0cOIp5Ru9NJiNzQP0tw2_9ayb3dk1-PsI4vvANR4-Mj2PfpSgaYM" target="_blank">MAX</a>.</p>
 
 <form id="f" novalidate>
 <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -85,7 +85,7 @@ h1,h2,h3{text-wrap:balance}p,li,.lead,.sub{text-wrap:pretty}</style>
 Мария — брови, ресницы — сб–вс</div><textarea id="masters" name="masters" required maxlength="3000"></textarea></div>
 <div class="f"><label for="promo">Акции и скидки, которые бот может предлагать</label><div class="h">Например: −15% на первый визит</div><textarea id="promo" name="promo" maxlength="2000" style="min-height:70px"></textarea></div>
 <div class="f"><label for="rules">Важные правила</label><div class="h">Предоплата, опоздания, отмена записи, парковка, можно ли с детьми и т. п.</div><textarea id="rules" name="rules" maxlength="3000"></textarea></div>
-<div class="f"><label for="never">Чего бот НЕ должен обещать или говорить</label><textarea id="never" name="never" maxlength="2000" style="min-height:70px"></textarea></div>
+<div class="f"><label for="never">Что бот не должен обещать или говорить</label><textarea id="never" name="never" maxlength="2000" style="min-height:70px"></textarea></div>
 </fieldset>
 
 <fieldset><legend><span>03</span>Заявки и ссылки</legend>
@@ -105,10 +105,10 @@ h1,h2,h3{text-wrap:balance}p,li,.lead,.sub{text-wrap:pretty}</style>
 <div class="f"><label for="links">Другие места, где вам пишут клиенты</label><div class="h">По желанию, каждая ссылка с новой строки: Instagram, WhatsApp и т. д. Мы подготовим для этих мест ссылку на бота и тексты, а вставите их вы.</div><textarea id="links" name="links" maxlength="2000" style="min-height:70px"></textarea></div>
 <div class="f"><label for="reviews">Где оставлять отзывы — ссылки</label><div class="h">Если отзывы собираются не на картах выше, укажите ссылку. После визита онлайн-администратор попросит клиента оставить отзыв. Если пусто, берём Яндекс/2ГИС/Google из полей выше.</div><textarea id="reviews" name="reviews" maxlength="1500" style="min-height:70px"></textarea></div>
 <div class="f"><div class="l req">Как бот общается с клиентами</div><div class="opts">
-<label><input type="radio" name="tone" value="На «вы», тепло и вежливо" required> На «вы», тепло и вежливо</label>
+<label><input type="radio" name="tone" value="На «вы», вежливо и доброжелательно" required> На «вы», вежливо и доброжелательно</label>
 <label><input type="radio" name="tone" value="На «вы», коротко и по делу"> На «вы», коротко и по делу</label>
-<label><input type="radio" name="tone" value="На «вы», легко, с эмодзи и юмором"> На «вы», легко, с эмодзи и юмором</label>
-<label><input type="radio" name="tone" value="На «ты», по-дружески"> На «ты», по-дружески</label></div></div>
+<label><input type="radio" name="tone" value="На «вы», в непринуждённом тоне, с эмодзи"> На «вы», в непринуждённом тоне, с эмодзи</label>
+<label><input type="radio" name="tone" value="На «ты», в дружеском тоне"> На «ты», в дружеском тоне</label></div></div>
 </fieldset>
 
 <fieldset><legend><span>04</span>Оформление</legend>
@@ -149,7 +149,7 @@ h1,h2,h3{text-wrap:balance}p,li,.lead,.sub{text-wrap:pretty}</style>
 <div class="f"><label for="comment">Комментарий или пожелания</label><textarea id="comment" name="comment" maxlength="3000" style="min-height:70px"></textarea></div>
 </fieldset>
 
-<label class="consent"><input type="checkbox" id="consent" required> <span>Согласен(на) на обработку персональных данных по <a href="https://zapis24bot.ru/privacy.html" target="_blank">политике конфиденциальности</a> и с <a href="https://zapis24bot.ru/oferta.html" target="_blank">договором-офертой</a>.</span></label>
+<label class="consent"><input type="checkbox" id="consent" required> <span>Я согласен (согласна) на обработку персональных данных по <a href="https://zapis24bot.ru/privacy.html" target="_blank">политике конфиденциальности</a> и с <a href="https://zapis24bot.ru/oferta.html" target="_blank">договором-офертой</a>.</span></label>
 <button type="submit" id="btn">Отправить анкету</button>
 <div class="progress" id="prog"><i></i></div>
 <div class="msg" id="msg"></div>
@@ -157,7 +157,7 @@ h1,h2,h3{text-wrap:balance}p,li,.lead,.sub{text-wrap:pretty}</style>
 </div>
 
 <div class="done" id="done">
-<h2>Спасибо!</h2>
+<h2>Благодарим вас</h2>
 <p>Анкета получена. Номер заявки: <b id="cid"></b>.</p>
 <p>Мы настроим бота и напишем вам в течение рабочего дня. 14 дней — бесплатно.</p>
 <p>Вопросы — в <a href="https://t.me/zapis_24" target="_blank">Telegram @zapis_24</a> или <a href="https://max.ru/u/f9LHodD0cOIp5Ru9NJiNzQP0tw2_9ayb3dk1-PsI4vvANR4-Mj2PfpSgaYM" target="_blank">MAX</a>.</p>
